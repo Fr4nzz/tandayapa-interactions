@@ -49,6 +49,7 @@
 html, body, #app {
   height: 100%;
   margin: 0;
+  overflow: hidden; /* panels scroll internally; never scroll the page (kills scrollbar flicker) */
 }
 
 #app {

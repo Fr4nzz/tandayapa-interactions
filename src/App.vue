@@ -39,7 +39,7 @@ function onExport() {
 </script>
 
 <template>
-  <div class="h-full flex flex-col bg-[var(--bg)] text-[var(--text)]">
+  <div class="h-full flex flex-col overflow-hidden bg-[var(--bg)] text-[var(--text)]">
     <!-- Header -->
     <header class="flex items-center gap-3 px-4 py-2.5 bg-[var(--surface)] border-b border-[var(--border)] z-10">
       <div class="flex items-center gap-2 min-w-0">
@@ -123,7 +123,7 @@ function onExport() {
       />
       <NodeDetail />
 
-      <main class="flex-1 min-w-0 relative">
+      <main class="flex-1 min-w-0 relative overflow-hidden">
         <InteractionGraph v-show="view === 'network'" ref="graphRef" :layout="layout" />
         <MapPanel v-if="view === 'map'" />
         <TablePanel v-if="view === 'table'" />
