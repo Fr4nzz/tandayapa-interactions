@@ -97,9 +97,9 @@ function addData(fit = true) {
   }
 }
 
-onMounted(async () => {
-  occ = await fetch(`${import.meta.env.BASE_URL}data/occurrences.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
-  loaded.value = true
+onMounted(() => {
+  // Create the map immediately so the basemap shows at once; the (large) occurrence JSON
+  // loads in parallel and points are added when BOTH the style and the data are ready.
   map = new maplibregl.Map({
     container: el.value,
     style: BASEMAPS[theme.mode] || BASEMAPS.dark,
@@ -109,7 +109,15 @@ onMounted(async () => {
   })
   map.addControl(new maplibregl.NavigationControl(), 'top-right')
   map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-right')
-  map.on('load', () => addData(true))
+
+  let styleReady = false
+  const tryAdd = () => { if (styleReady && loaded.value) addData(true) }
+  map.on('load', () => { styleReady = true; tryAdd() })
+
+  fetch(`${import.meta.env.BASE_URL}data/occurrences.json`)
+    .then((r) => (r.ok ? r.json() : {}))
+    .catch(() => ({}))
+    .then((j) => { occ = j || {}; loaded.value = true; tryAdd() })
 })
 
 // Re-style on theme mode change, re-adding the data layer once the new style is ready.
@@ -130,7 +138,10 @@ onBeforeUnmount(() => map && map.remove())
     <div ref="el" class="w-full h-full"></div>
     <div class="absolute top-3 left-3 bg-black/40 backdrop-blur text-white rounded-lg px-3 py-2 text-[11px] pointer-events-none">
       <div class="font-medium">{{ store.selectedId ? store.selectedId : 'All taxa' }} · GBIF occurrences</div>
-      <div class="opacity-80">{{ store.selectedId ? 'click a taxon in the network to change' : 'select a taxon to focus' }}</div>
+      <div class="opacity-80">
+        <span v-if="!loaded">loading occurrences…</span>
+        <span v-else>{{ store.selectedId ? 'click a taxon in the network to change' : 'select a taxon to focus' }}</span>
+      </div>
     </div>
   </div>
 </template>
