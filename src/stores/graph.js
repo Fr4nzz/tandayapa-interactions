@@ -2,10 +2,14 @@ import { defineStore } from 'pinia'
 import curated from '../data/interactions.json'
 import ephi from '../data/interactions_ephi.json'
 import papers from '../data/interactions_papers.json'
+import ithomiini from '../data/interactions_ithomiini.json'
 
-// Merge the curated multi-type dataset with the Duchenne/EPHI anchor (~1,686 edges)
-// and the records mined from open-access papers (e.g. Harrigan 2014 host–parasite).
-const data = { records: [...curated.records, ...ephi.records, ...papers.records] }
+// Merge the curated multi-type dataset with the Duchenne/EPHI anchor (~1,686 edges),
+// the records mined from open-access papers (Harrigan, Tinoco…), and the curated
+// Ithomiini larval host-plant associations (insect–plant layer).
+const data = {
+  records: [...curated.records, ...ephi.records, ...papers.records, ...ithomiini.records],
+}
 
 // GloBI-compatible interaction-type vocabulary (forward term -> reciprocal term).
 export const GLOBI_INVERSE = {
@@ -15,6 +19,8 @@ export const GLOBI_INVERSE = {
   eatsFruitPulpOf: 'eatenBy',
   nectarRobs: 'nectarRobbedBy',
   parasiteOf: 'hasParasite',
+  eats: 'eatenBy',
+  preysOn: 'preyedUponBy',
 }
 
 export function gbifSpeciesUrl(name) {
@@ -53,6 +59,8 @@ export const TYPE_COLORS = {
   eatsFruitPulpOf: '#fbbf24',
   nectarRobs: '#fb7185',
   parasiteOf: '#f87171',
+  eats: '#a3e635',
+  preysOn: '#fb923c',
 }
 
 export const TYPE_LABELS = {
@@ -62,6 +70,8 @@ export const TYPE_LABELS = {
   eatsFruitPulpOf: 'eats fruit pulp of',
   nectarRobs: 'nectar-robs',
   parasiteOf: 'parasite of',
+  eats: 'eats (host plant)',
+  preysOn: 'preys on',
 }
 
 // Direction-aware phrasing. `out` = selected taxon is the SOURCE (acts on partner);
@@ -73,6 +83,8 @@ export const TYPE_DIR_LABELS = {
   eatsFruitPulpOf: { out: 'eats fruit pulp of', in: 'fruit pulp eaten by' },
   nectarRobs: { out: 'nectar-robs', in: 'nectar-robbed by' },
   parasiteOf: { out: 'parasite of', in: 'parasitized by' },
+  eats: { out: 'eats (host plant)', in: 'larval host plant of' },
+  preysOn: { out: 'preys on', in: 'preyed upon by' },
 }
 
 const SCOPE_LABELS = {
@@ -80,6 +92,8 @@ const SCOPE_LABELS = {
   'nearby reserve': 'Nearby reserve',
   'regional NW Ecuador': 'Regional NW Ecuador',
   'regional Andes (comparative)': 'Regional Andes (comparative)',
+  'corridor-core': 'Corridor core',
+  'Neotropical (host-plant record)': 'Neotropical (host-plant)',
 }
 
 function uniq(arr) {
