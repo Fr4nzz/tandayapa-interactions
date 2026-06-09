@@ -225,9 +225,10 @@ onMounted(() => {
     cy.on('tap', (evt) => {
       if (evt.target === cy) store.select(null)
     })
-    cy.on('mouseover', 'node', (evt) => highlightNeighborhood(evt.target))
-    // On mouse-out, revert to the selected node's persistent highlight (or clear if none selected).
-    cy.on('mouseout', 'node', () => applySelectionHighlight())
+    // Hover-highlight only when nothing is selected; once a node is selected the highlight
+    // stays locked to it and other nodes don't react to hover.
+    cy.on('mouseover', 'node', (evt) => { if (!store.selectedId) highlightNeighborhood(evt.target) })
+    cy.on('mouseout', 'node', () => { if (!store.selectedId) clearHighlight() })
   }
 
   applyFilter()
