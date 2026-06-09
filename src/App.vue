@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineAsyncComponent } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
 import { Info, SlidersHorizontal, Github, X, Sun, Moon, Palette, Share2, Map as MapIcon, Table as TableIcon } from 'lucide-vue-next'
 import { useGraphStore, TYPE_COLORS, TYPE_LABELS } from './stores/graph'
 import { useThemeStore, THEMES } from './stores/theme'
@@ -18,6 +18,14 @@ const graphRef = ref(null)
 const showAbout = ref(false)
 const showFilters = ref(false)
 const showPalette = ref(false)
+const gbif = ref(null)
+
+onMounted(() => {
+  fetch(`${import.meta.env.BASE_URL}data/gbif_attribution.json`)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((j) => (gbif.value = j))
+    .catch(() => {})
+})
 
 function onExport() {
   const url = graphRef.value?.exportPng()
@@ -150,6 +158,11 @@ function onExport() {
             <p>
               Taxa images & occurrences via <a class="underline" style="color:var(--accent)" href="https://www.gbif.org" target="_blank" rel="noopener">GBIF</a>,
               under each record’s CC license. Built with Vue, Cytoscape.js & Tailwind.
+            </p>
+            <p v-if="gbif?.doi" class="text-[11px] text-[var(--faint)] border-t border-[var(--border)] pt-2">
+              Occurrence & media: GBIF Occurrence Download
+              <a class="underline" style="color:var(--accent)" :href="`https://doi.org/${gbif.doi}`" target="_blank" rel="noopener">https://doi.org/{{ gbif.doi }}</a>
+              (one citable export; observations prioritised over museum specimens).
             </p>
           </div>
         </div>

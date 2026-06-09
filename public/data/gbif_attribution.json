@@ -1,5 +1,1 @@
-{
-  "note": "Occurrence and media data from GBIF (https://www.gbif.org). Images are reproduced under their individual per-record Creative Commons licenses (CC0 / CC-BY); see each entry's license and source_url for attribution.",
-  "source": "https://www.gbif.org",
-  "generated_by": "scripts/build_gbif_images.py"
-}
+{"doi": "10.15468/dl.486sf8", "citation": "GBIF Occurrence Download https://doi.org/10.15468/dl.486sf8 accessed via GBIF.org on 2026-06-09", "note": "Occurrence and media data from a single citable GBIF Download API export (DWCA). Images are served as URLs under each record's individual Creative Commons license (see each entry's license and source_url). Observations (iNaturalist / HUMAN_OBSERVATION) are prioritised over preserved specimens.", "source": "https://www.gbif.org", "total_records": 3192970, "generated_by": "scripts/build_gbif_download.py"}
