@@ -66,7 +66,7 @@ def fetch_points(key, cap=250):
 def main():
     occ = json.load(open(OCC, encoding="utf-8")) if os.path.exists(OCC) else {"_meta": {}}
     taxa = {}
-    for rel in ("interactions.json", "interactions_ephi.json", "interactions_papers.json"):
+    for rel in ("interactions.json", "interactions_ephi.json", "interactions_papers.json", "interactions_ithomiini.json", "interactions_frugivory.json", "interactions_bats.json"):
         p = os.path.join(ROOT, "src", "data", rel)
         if os.path.exists(p):
             for r in json.load(open(p, encoding="utf-8")).get("records", []):
