@@ -128,6 +128,7 @@ const groups = computed(() => {
                 <div class="flex items-center gap-1 text-[11px] text-[var(--faint)]">
                   <MapPin :size="10" /> <span class="truncate">{{ it.locality }} · {{ store.scopeLabel(it.scope) }}</span>
                 </div>
+                <div class="text-[11px] text-[var(--faint)] truncate italic">{{ it.ref }}</div>
               </div>
             </li>
           </ul>

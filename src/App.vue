@@ -1,11 +1,12 @@
 <script setup>
 import { ref, defineAsyncComponent } from 'vue'
-import { Info, SlidersHorizontal, Github, X, Sun, Moon, Palette, Share2, Map as MapIcon } from 'lucide-vue-next'
+import { Info, SlidersHorizontal, Github, X, Sun, Moon, Palette, Share2, Map as MapIcon, Table as TableIcon } from 'lucide-vue-next'
 import { useGraphStore, TYPE_COLORS, TYPE_LABELS } from './stores/graph'
 import { useThemeStore, THEMES } from './stores/theme'
 import InteractionGraph from './components/InteractionGraph.vue'
 import NodeDetail from './components/NodeDetail.vue'
 import FilterPanel from './components/FilterPanel.vue'
+import TablePanel from './components/TablePanel.vue'
 // Lazy: the maplibre chunk (~1 MB) loads only when the map view is first opened.
 const MapPanel = defineAsyncComponent(() => import('./components/MapPanel.vue'))
 
@@ -59,6 +60,11 @@ function onExport() {
           :style="view === 'map' ? { background: 'var(--accent)', color: '#fff' } : {}"
           @click="view = 'map'"
         ><MapIcon :size="13" /> <span class="hidden sm:inline">Map</span></button>
+        <button
+          class="seg" :class="view === 'table' ? 'seg-on' : ''"
+          :style="view === 'table' ? { background: 'var(--accent)', color: '#fff' } : {}"
+          @click="view = 'table'"
+        ><TableIcon :size="13" /> <span class="hidden sm:inline">Table</span></button>
       </div>
 
       <div class="flex items-center gap-1.5">
@@ -103,6 +109,7 @@ function onExport() {
       <main class="flex-1 min-w-0 relative">
         <InteractionGraph v-show="view === 'network'" ref="graphRef" :layout="layout" />
         <MapPanel v-if="view === 'map'" />
+        <TablePanel v-if="view === 'table'" />
 
         <div v-if="view === 'network'" class="absolute bottom-3 left-3 bg-black/40 backdrop-blur text-white rounded-lg px-3 py-2 text-[11px] leading-relaxed pointer-events-none">
           <div class="font-medium mb-1 opacity-90">Hover to highlight · click for details</div>
