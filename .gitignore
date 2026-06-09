@@ -6,3 +6,6 @@ dist
 *.env
 !.env.example
 .vite
+
+# Downloaded papers (copyrighted PDFs + raw datasets) — kept local only
+papers/

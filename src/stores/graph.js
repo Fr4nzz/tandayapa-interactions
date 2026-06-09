@@ -1,5 +1,26 @@
 import { defineStore } from 'pinia'
-import data from '../data/interactions.json'
+import curated from '../data/interactions.json'
+import ephi from '../data/interactions_ephi.json'
+
+// Merge the curated multi-type dataset with the Duchenne/EPHI anchor (~1,686 edges).
+const data = { records: [...curated.records, ...ephi.records] }
+
+// GloBI-compatible interaction-type vocabulary (forward term -> reciprocal term).
+export const GLOBI_INVERSE = {
+  visitsFlowersOf: 'flowersVisitedBy',
+  pollinates: 'pollinatedBy',
+  dispersesSeedsOf: 'hasDispersalVector',
+  eatsFruitPulpOf: 'eatenBy',
+  nectarRobs: 'nectarRobbedBy',
+  parasiteOf: 'hasParasite',
+}
+
+export function gbifSpeciesUrl(name) {
+  return `https://www.gbif.org/species/search?q=${encodeURIComponent(name)}`
+}
+export function globiTaxonUrl(name) {
+  return `https://www.globalbioticinteractions.org/?sourceTaxon=${encodeURIComponent(name)}`
+}
 
 // One vivid color per taxon group (tuned for a dark graph canvas).
 export const GROUP_COLORS = {
@@ -134,6 +155,26 @@ export const useGraphStore = defineStore('graph', {
     selectedRecords(s) {
       if (!s.selectedId) return []
       return s.records.filter((r) => r.source === s.selectedId || r.target === s.selectedId)
+    },
+
+    // Export the (currently visible) interactions as a GloBI-compatible CSV.
+    globiCsv(s) {
+      const cols = [
+        'source_taxon_name', 'source_taxon_group', 'interaction_type',
+        'target_taxon_name', 'target_taxon_group', 'locality', 'locality_scope',
+        'elevation_m', 'evidence', 'certainty', 'reference',
+      ]
+      const esc = (v) => {
+        const str = v == null ? '' : String(v)
+        return /[",\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str
+      }
+      const rows = s.records
+        .filter((r) => this.isEdgeVisible(r))
+        .map((r) => [
+          r.source, r.sourceGroup, r.type, r.target, r.targetGroup,
+          r.locality, r.scope, r.elevation_m, r.evidence, r.certainty, r.ref,
+        ].map(esc).join(','))
+      return [cols.join(','), ...rows].join('\n')
     },
 
     searchMatches(s) {

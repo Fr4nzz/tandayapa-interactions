@@ -180,18 +180,32 @@ def build_attribution(creator, publisher, license_str):
 
 
 def main():
-    with open(INPUT_PATH, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    records = data.get("records", [])
+    # Load the curated dataset AND the EPHI anchor dataset (if present).
+    records = []
+    for rel in ("interactions.json", "interactions_ephi.json"):
+        p = os.path.join(ROOT, "src", "data", rel)
+        if os.path.exists(p):
+            with open(p, "r", encoding="utf-8") as f:
+                records += json.load(f).get("records", [])
     taxa = collect_taxa(records)
     n_total = len(taxa)
     print("Collected %d unique taxa from %d records." % (n_total, len(records)))
 
+    # Incremental: keep images we already have, only fetch the missing taxa.
     images = {}
-    n_found = 0
+    if os.path.exists(IMAGES_PATH):
+        try:
+            with open(IMAGES_PATH, "r", encoding="utf-8") as f:
+                images = json.load(f)
+        except Exception:
+            images = {}
+    print("Already have %d images; fetching the rest." % len(images))
+    n_found = len(images)
     missed = []
 
     for name, group in taxa.items():
+        if name in images:
+            continue
         try:
             key, matched = resolve_key(name, group)
             if not key:

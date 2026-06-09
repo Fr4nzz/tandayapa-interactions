@@ -7,4 +7,15 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? '/tandayapa-interactions/' : '/',
   plugins: [vue(), tailwindcss()],
+  build: {
+    chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          cytoscape: ['cytoscape', 'cytoscape-fcose'],
+          maplibre: ['maplibre-gl'],
+        },
+      },
+    },
+  },
 })

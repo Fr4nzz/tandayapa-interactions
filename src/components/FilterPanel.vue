@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { Search, Crosshair, Download, Layers } from 'lucide-vue-next'
+import { Search, Crosshair, Download, Layers, FileDown } from 'lucide-vue-next'
 import {
   useGraphStore, GROUP_COLORS, GROUP_LABELS, TYPE_COLORS, TYPE_LABELS,
 } from '../stores/graph'
@@ -24,6 +24,14 @@ function pick(id) {
 }
 function onBlur() {
   window.setTimeout(() => (showResults.value = false), 150)
+}
+function downloadCsv() {
+  const blob = new Blob([store.globiCsv], { type: 'text/csv;charset=utf-8' })
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = 'tandayapa-interactions-globi.csv'
+  a.click()
+  URL.revokeObjectURL(a.href)
 }
 </script>
 
@@ -80,6 +88,7 @@ function onBlur() {
         <div class="flex gap-1.5 mt-2">
           <button class="ctrl" @click="emit('fit')"><Crosshair :size="13" /> Fit</button>
           <button class="ctrl" @click="emit('export')"><Download :size="13" /> PNG</button>
+          <button class="ctrl" @click="downloadCsv" title="Export visible interactions as GloBI-compatible CSV"><FileDown :size="13" /> CSV</button>
         </div>
       </div>
 

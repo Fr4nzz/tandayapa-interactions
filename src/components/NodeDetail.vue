@@ -1,7 +1,10 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { X, ExternalLink, MapPin } from 'lucide-vue-next'
-import { useGraphStore, GROUP_COLORS, GROUP_LABELS, TYPE_COLORS, TYPE_DIR_LABELS } from '../stores/graph'
+import {
+  useGraphStore, GROUP_COLORS, GROUP_LABELS, TYPE_COLORS, TYPE_DIR_LABELS,
+  gbifSpeciesUrl, globiTaxonUrl,
+} from '../stores/graph'
 
 const store = useGraphStore()
 
@@ -79,6 +82,11 @@ const groups = computed(() => {
           </a>
         </p>
 
+        <div class="flex gap-1.5 mt-2.5">
+          <a class="extlink" :href="gbifSpeciesUrl(id)" target="_blank" rel="noopener">GBIF <ExternalLink :size="9" /></a>
+          <a class="extlink" :href="globiTaxonUrl(id)" target="_blank" rel="noopener">GloBI <ExternalLink :size="9" /></a>
+        </div>
+
         <div v-for="g in groups" :key="g.key" class="mt-4">
           <div class="flex items-center gap-2 mb-1.5">
             <span class="w-3 h-1.5 rounded" :style="{ background: TYPE_COLORS[g.type] }"></span>
@@ -108,4 +116,10 @@ const groups = computed(() => {
 <style scoped>
 .slide-enter-active, .slide-leave-active { transition: transform 0.25s ease, opacity 0.25s ease; }
 .slide-enter-from, .slide-leave-to { transform: translateX(20px); opacity: 0; }
+.extlink {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 11px; padding: 2px 8px; border-radius: 9999px;
+  border: 1px solid var(--border); color: var(--muted); background: var(--surface-2);
+}
+.extlink:hover { color: var(--text); border-color: var(--faint); }
 </style>

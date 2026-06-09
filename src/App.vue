@@ -1,15 +1,18 @@
 <script setup>
-import { ref } from 'vue'
-import { Info, SlidersHorizontal, Github, X, Sun, Moon, Palette } from 'lucide-vue-next'
+import { ref, defineAsyncComponent } from 'vue'
+import { Info, SlidersHorizontal, Github, X, Sun, Moon, Palette, Share2, Map as MapIcon } from 'lucide-vue-next'
 import { useGraphStore, TYPE_COLORS, TYPE_LABELS } from './stores/graph'
 import { useThemeStore, THEMES } from './stores/theme'
 import InteractionGraph from './components/InteractionGraph.vue'
 import NodeDetail from './components/NodeDetail.vue'
 import FilterPanel from './components/FilterPanel.vue'
+// Lazy: the maplibre chunk (~1 MB) loads only when the map view is first opened.
+const MapPanel = defineAsyncComponent(() => import('./components/MapPanel.vue'))
 
 const store = useGraphStore()
 const theme = useThemeStore()
 const layout = ref('fcose')
+const view = ref('network')
 const graphRef = ref(null)
 const showAbout = ref(false)
 const showFilters = ref(false)
@@ -44,7 +47,21 @@ function onExport() {
         <span class="stat"><b>{{ store.stats.sources }}</b> sources</span>
       </div>
 
-      <div class="ml-auto flex items-center gap-1.5">
+      <!-- view toggle -->
+      <div class="ml-auto flex items-center rounded-lg border border-[var(--border)] overflow-hidden mr-1">
+        <button
+          class="seg" :class="view === 'network' ? 'seg-on' : ''"
+          :style="view === 'network' ? { background: 'var(--accent)', color: '#fff' } : {}"
+          @click="view = 'network'"
+        ><Share2 :size="13" /> Network</button>
+        <button
+          class="seg" :class="view === 'map' ? 'seg-on' : ''"
+          :style="view === 'map' ? { background: 'var(--accent)', color: '#fff' } : {}"
+          @click="view = 'map'"
+        ><MapIcon :size="13" /> Map</button>
+      </div>
+
+      <div class="flex items-center gap-1.5">
         <!-- accent palette -->
         <div class="relative">
           <button class="hbtn" @click="showPalette = !showPalette" title="Accent"><Palette :size="16" /></button>
@@ -84,9 +101,10 @@ function onExport() {
       />
 
       <main class="flex-1 min-w-0 relative">
-        <InteractionGraph ref="graphRef" :layout="layout" />
+        <InteractionGraph v-show="view === 'network'" ref="graphRef" :layout="layout" />
+        <MapPanel v-if="view === 'map'" />
 
-        <div class="absolute bottom-3 left-3 bg-black/40 backdrop-blur text-white rounded-lg px-3 py-2 text-[11px] leading-relaxed pointer-events-none">
+        <div v-if="view === 'network'" class="absolute bottom-3 left-3 bg-black/40 backdrop-blur text-white rounded-lg px-3 py-2 text-[11px] leading-relaxed pointer-events-none">
           <div class="font-medium mb-1 opacity-90">Hover to highlight · click for details</div>
           <div class="flex flex-wrap gap-x-3 gap-y-0.5 max-w-[260px]">
             <span v-for="t in store.allTypes" :key="t" class="inline-flex items-center gap-1">
@@ -114,8 +132,9 @@ function onExport() {
             </p>
             <p>
               Edges are hand-extracted from <b class="text-[var(--text)]">open-access literature</b> (EPHI/Maquipucuna,
-              Muchhala 2002/2006/2009, Mahoney 2018, Guevara 2017, Abad 2021, Dellinger 2014), with the Duchenne/EPHI
-              Dryad anchor (~1,690 plant–hummingbird interactions) being ingested.
+              Muchhala 2002/2006/2009, Mahoney 2018, Guevara 2017, Abad 2021, Dellinger 2014) plus the
+              <b class="text-[var(--text)]">Duchenne/EPHI</b> camera-trap anchor (Dryad, ~1,686 plant–hummingbird
+              interactions across 11 Pichincha reserves).
             </p>
             <p>
               <b class="text-[var(--text)]">Honesty:</b> every interaction keeps its true locality; nearby-reserve records
@@ -144,6 +163,12 @@ function onExport() {
   border: 1px solid var(--border); transition: all 0.15s;
 }
 .hbtn:hover { background: var(--surface-3); color: var(--text); }
+.seg {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 12px; padding: 5px 10px; color: var(--muted); background: var(--surface-2);
+}
+.seg:hover { color: var(--text); }
+.seg-on { color: #fff; }
 .fade-enter-active, .fade-leave-active { transition: opacity 0.2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>

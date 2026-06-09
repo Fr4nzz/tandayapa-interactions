@@ -13,6 +13,10 @@ const theme = useThemeStore()
 const el = ref(null)
 let cy = null
 
+// With the EPHI anchor merged the graph is large; only label nodes on hover/selection
+// to avoid an unreadable hairball.
+const big = store.nodes.length > 120
+
 function cssVar(name, fallback) {
   if (typeof window === 'undefined') return fallback
   const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
@@ -48,6 +52,7 @@ const stylesheet = [
       'text-max-width': 110,
       'text-valign': 'bottom',
       'text-margin-y': 3,
+      'text-opacity': big ? 0 : 1,
       width: (n) => 14 + Math.min(n.data('degree') * 2.4, 30),
       height: (n) => 14 + Math.min(n.data('degree') * 2.4, 30),
       'border-width': 1.5,
@@ -69,16 +74,25 @@ const stylesheet = [
       opacity: 0.55,
     },
   },
-  { selector: 'node.selected', style: { 'border-width': 4, 'border-color': '#ffffff' } },
+  { selector: 'node.selected', style: { 'border-width': 4, 'border-color': '#ffffff', 'text-opacity': 1 } },
   { selector: '.dim', style: { opacity: 0.07, 'text-opacity': 0.04 } },
   { selector: 'edge.highlight', style: { opacity: 0.95, width: 2.6 } },
-  { selector: 'node.highlight', style: { 'border-color': '#ffffff', 'border-width': 3 } },
+  { selector: 'node.highlight', style: { 'border-color': '#ffffff', 'border-width': 3, 'text-opacity': 1 } },
   { selector: '.hidden', style: { display: 'none' } },
 ]
 
 function layoutOpts(name) {
   if (name === 'fcose')
-    return { name: 'fcose', quality: 'proof', animate: true, animationDuration: 600, nodeSeparation: 110, idealEdgeLength: 95, nodeRepulsion: 7000 }
+    return {
+      name: 'fcose',
+      quality: big ? 'default' : 'proof',
+      animate: !big,
+      animationDuration: 600,
+      nodeSeparation: big ? 75 : 110,
+      idealEdgeLength: big ? 70 : 95,
+      nodeRepulsion: big ? 9000 : 7000,
+      numIter: big ? 1500 : 2500,
+    }
   if (name === 'concentric')
     return { name: 'concentric', animate: true, concentric: (n) => n.degree(), levelWidth: () => 2, minNodeSpacing: 26 }
   if (name === 'circle') return { name: 'circle', animate: true, spacingFactor: 1.1 }
