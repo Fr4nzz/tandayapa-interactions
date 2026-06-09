@@ -1,0 +1,5 @@
+{
+  "note": "Occurrence and media data from GBIF (https://www.gbif.org). Images are reproduced under their individual per-record Creative Commons licenses (CC0 / CC-BY); see each entry's license and source_url for attribution.",
+  "source": "https://www.gbif.org",
+  "generated_by": "scripts/build_gbif_images.py"
+}

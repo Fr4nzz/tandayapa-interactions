@@ -1,0 +1,572 @@
+{
+  "Adelomyia melanogenys": {
+    "attribution": "© Jeremy Coleman, iNaturalist (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "creator": "Jeremy Coleman",
+    "gbifID": "6133393506",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F611215831%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611215831/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6133393506"
+  },
+  "Aglaiocercus coelestis": {
+    "attribution": "© Jeremy Coleman, iNaturalist (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "creator": "Jeremy Coleman",
+    "gbifID": "6131100345",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F611061758%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611061758/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6131100345"
+  },
+  "Anoura caudifera": {
+    "attribution": "© Manuel Ruedi, MHNG (http://creativecommons.org/licenses/by/4.0/legalcode)",
+    "creator": "Manuel Ruedi",
+    "gbifID": "1142101226",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fassets-swiss.specifycloud.org%2Ffileget%3Fcoll%3Dmhng%26type%3DO%26filename%3Dsp61603873124039930504.att.JPG&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/legalcode",
+    "original_url": "https://assets-swiss.specifycloud.org/fileget?coll=mhng&type=O&filename=sp61603873124039930504.att.JPG",
+    "publisher": "MHNG",
+    "source_url": "https://www.gbif.org/occurrence/1142101226"
+  },
+  "Anoura fistulata": {
+    "attribution": "© Manuel Ruedi, iNaturalist (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "creator": "Manuel Ruedi",
+    "gbifID": "4431166642",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F329098705%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/329098705/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/4431166642"
+  },
+  "Anoura geoffroyi": {
+    "attribution": "© Celso Henrique Varela Rios, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Celso Henrique Varela Rios",
+    "gbifID": "6147534007",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F611656245%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611656245/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6147534007"
+  },
+  "Aphelandra acanthus": {
+    "attribution": "© Daniel Mesa, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Daniel Mesa",
+    "gbifID": "5133764356",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F473089051%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/473089051/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5133764356"
+  },
+  "Axinaea scutigera": {
+    "attribution": "© Nicolás Baresch Uribe, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Nicolás Baresch Uribe",
+    "gbifID": "4903718604",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F390100007%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/390100007/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/4903718604"
+  },
+  "Boissonneaua flavescens": {
+    "attribution": "© Jeremy Coleman, iNaturalist (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "creator": "Jeremy Coleman",
+    "gbifID": "6130026324",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F611055632%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611055632/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6130026324"
+  },
+  "Bombacopsis squamigera": {
+    "attribution": "© MBG, MO (http://creativecommons.org/licenses/by-nc-sa/3.0/)",
+    "creator": "MBG",
+    "gbifID": "4031864393",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fimages.mobot.org%2FRISScanning03%2Fdetailimages%2FRISScanning03%2F103491000%2F729FFAAB-1BA9-46E4-8001-4403380EA48D.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "original_url": "https://images.mobot.org/RISScanning03/detailimages/RISScanning03/103491000/729FFAAB-1BA9-46E4-8001-4403380EA48D.jpg",
+    "publisher": "MO",
+    "source_url": "https://www.gbif.org/occurrence/4031864393"
+  },
+  "Burmeistera ceratocarpa": {
+    "attribution": "© Field Museum of Natural History, F ((c) Field Museum of Natural History - CC BY-NC 4.0)",
+    "creator": "Field Museum of Natural History",
+    "gbifID": "1228635249",
+    "image_url": "https://wsrv.nl/?url=http%3A%2F%2Ffm-digital-assets.fieldmuseum.org%2F634%2F050%2FV0145880F.jpg&w=480&output=webp",
+    "license": "(c) Field Museum of Natural History - CC BY-NC 4.0",
+    "original_url": "http://fm-digital-assets.fieldmuseum.org/634/050/V0145880F.jpg",
+    "publisher": "F",
+    "source_url": "https://www.gbif.org/occurrence/1228635249"
+  },
+  "Burmeistera cyclostigmata": {
+    "attribution": "© Magdalena Ginko, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Magdalena Ginko",
+    "gbifID": "5087217607",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F472362617%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/472362617/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5087217607"
+  },
+  "Burmeistera multiflora": {
+    "attribution": "© Diego F. Cisneros-Heredia, iNaturalist (http://creativecommons.org/licenses/by-sa/4.0/)",
+    "creator": "Diego F. Cisneros-Heredia",
+    "gbifID": "6184927137",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F365761827%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-sa/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/365761827/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6184927137"
+  },
+  "Burmeistera rubrosepala": {
+    "attribution": "© Jameson, W., MNHN (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Jameson, W.",
+    "gbifID": "436986075",
+    "image_url": "https://wsrv.nl/?url=http%3A%2F%2Fmediaphoto.mnhn.fr%2Fmedia%2F1441351980766EmpoYJBrE7l71ciq&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "http://mediaphoto.mnhn.fr/media/1441351980766EmpoYJBrE7l71ciq",
+    "publisher": "MNHN",
+    "source_url": "https://www.gbif.org/occurrence/436986075"
+  },
+  "Burmeistera smaragdi": {
+    "attribution": "© The New York Botanical Garden, NY (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "The New York Botanical Garden",
+    "gbifID": "1929560106",
+    "image_url": "https://wsrv.nl/?url=http%3A%2F%2Fsweetgum.nybg.org%2Fimages3%2F2453%2F361%2F03042836.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "http://sweetgum.nybg.org/images3/2453/361/03042836.jpg",
+    "publisher": "NY",
+    "source_url": "https://www.gbif.org/occurrence/1929560106"
+  },
+  "Burmeistera sodiroana": {
+    "attribution": "© John G. Phillips, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "John G. Phillips",
+    "gbifID": "4909134505",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F61190120%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/61190120/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/4909134505"
+  },
+  "Burmeistera succulenta": {
+    "attribution": "© Nolan Exe, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Nolan Exe",
+    "gbifID": "5133213079",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F485298579%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/485298579/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5133213079"
+  },
+  "Burmeistera truncata": {
+    "attribution": "© Royal Botanic Gardens, Kew, K (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Royal Botanic Gardens, Kew",
+    "gbifID": "5072825159",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fd2jcv3kl45hlgi.cloudfront.net%2Fce04833ef057b18a8edd5db91c75aaa3.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://d2jcv3kl45hlgi.cloudfront.net/ce04833ef057b18a8edd5db91c75aaa3.jpg",
+    "publisher": "K",
+    "source_url": "https://www.gbif.org/occurrence/5072825159"
+  },
+  "Cavendishia grandifolia": {
+    "attribution": "© Rob Foster, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Rob Foster",
+    "gbifID": "4535799137",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F351751055%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/351751055/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/4535799137"
+  },
+  "Centropogon nigricans": {
+    "attribution": "© Nolan Exe, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Nolan Exe",
+    "gbifID": "4046664206",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F258148971%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/258148971/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/4046664206"
+  },
+  "Centropogon solanifolius": {
+    "attribution": "© Hank Raizen, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Hank Raizen",
+    "gbifID": "6131397840",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F607830179%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607830179/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6131397840"
+  },
+  "Cephalopterus penduliger": {
+    "attribution": "© Nico, iNaturalist (http://creativecommons.org/publicdomain/zero/1.0/)",
+    "creator": "Nico",
+    "gbifID": "6188591129",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F631004484%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/631004484/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6188591129"
+  },
+  "Coeligena torquata": {
+    "attribution": "© Peter Archdale, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Peter Archdale",
+    "gbifID": "6147354565",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F612906639%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/612906639/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6147354565"
+  },
+  "Coeligena wilsoni": {
+    "attribution": "© Anna Hess, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Anna Hess",
+    "gbifID": "6130197612",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F608382301%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608382301/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6130197612"
+  },
+  "Costus pulverulentus": {
+    "attribution": "© John D Reynolds, iNaturalist (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "creator": "John D Reynolds",
+    "gbifID": "6178416825",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F621623743%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/621623743/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6178416825"
+  },
+  "Diglossa caerulescens": {
+    "attribution": "© Ryan F. Mandelbaum, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Ryan F. Mandelbaum",
+    "gbifID": "6252333609",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F652833839%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/652833839/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6252333609"
+  },
+  "Diglossa cyanea": {
+    "attribution": "© Alina Martin, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Alina Martin",
+    "gbifID": "6130268409",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F610574161%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610574161/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6130268409"
+  },
+  "Disterigma alaternoides": {
+    "attribution": "© desertnaturalist, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "desertnaturalist",
+    "gbifID": "5938276371",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F544458594%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/544458594/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5938276371"
+  },
+  "Eriocnemis nigrivestis": {
+    "attribution": "© Alina Martin, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Alina Martin",
+    "gbifID": "6163208722",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F611148176%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611148176/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6163208722"
+  },
+  "Erythrina megistophylla": {
+    "attribution": "© Arizona State University Vascular Plant Herbarium, ASU (http://creativecommons.org/licenses/by/4.0/legalcode)",
+    "creator": "Arizona State University Vascular Plant Herbarium",
+    "gbifID": "3762881660",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fmedia01.symbiota.org%2Fmedia%2Fseinet%2Fswnode%2FASU_Plants%2FCSP21%2FCSP21101_lg.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/legalcode",
+    "original_url": "https://media01.symbiota.org/media/seinet/swnode/ASU_Plants/CSP21/CSP21101_lg.jpg",
+    "publisher": "ASU",
+    "source_url": "https://www.gbif.org/occurrence/3762881660"
+  },
+  "Heliconia impudica": {
+    "attribution": "© Daniel Fernicola, Smithsonian Institution, NMNH, Botany (http://creativecommons.org/publicdomain/zero/1.0/)",
+    "creator": "Daniel Fernicola",
+    "gbifID": "2900452746",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fcollections.nmnh.si.edu%2Fmedia%2F%3Fi%3D13577481%26h%3D2000&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "original_url": "https://collections.nmnh.si.edu/media/?i=13577481&h=2000",
+    "publisher": "Smithsonian Institution, NMNH, Botany",
+    "source_url": "https://www.gbif.org/occurrence/2900452746"
+  },
+  "Heliodoxa imperatrix": {
+    "attribution": "© Alina Martin, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Alina Martin",
+    "gbifID": "6178956969",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F621366568%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/621366568/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6178956969"
+  },
+  "Heliodoxa jacula": {
+    "attribution": "© kristen_276, iNaturalist (http://creativecommons.org/publicdomain/zero/1.0/)",
+    "creator": "kristen_276",
+    "gbifID": "6130071107",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F606700691%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606700691/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6130071107"
+  },
+  "Heliodoxa rubinoides": {
+    "attribution": "© Jeremy Coleman, iNaturalist (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "creator": "Jeremy Coleman",
+    "gbifID": "6133297961",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F611215626%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611215626/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6133297961"
+  },
+  "Macleania rupestris": {
+    "attribution": "© Kabir Montesinos, iNaturalist (http://creativecommons.org/licenses/by-nc-nd/4.0/)",
+    "creator": "Kabir Montesinos",
+    "gbifID": "5938162741",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F605523256%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605523256/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5938162741"
+  },
+  "Macleania smithiana": {
+    "attribution": "© Nicolás Baresch Uribe, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Nicolás Baresch Uribe",
+    "gbifID": "3902103886",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F219323289%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/219323289/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/3902103886"
+  },
+  "Marcgravia coriacea": {
+    "attribution": "© Jairam-Doerga, S. et al., BBS (http://creativecommons.org/publicdomain/zero/1.0/legalcode)",
+    "creator": "Jairam-Doerga, S. et al.",
+    "gbifID": "6357443343",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fia801004.us.archive.org%2F30%2Fitems%2Fbbs-ess-collection%2FBBS0043872.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/legalcode",
+    "original_url": "https://ia801004.us.archive.org/30/items/bbs-ess-collection/BBS0043872.jpg",
+    "publisher": "BBS",
+    "source_url": "https://www.gbif.org/occurrence/6357443343"
+  },
+  "Markea sp.": {
+    "attribution": "© Guillaume Delaitre, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Guillaume Delaitre",
+    "gbifID": "5140633845",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F494193243%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/494193243/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5140633845"
+  },
+  "Meriania pichinchensis": {
+    "attribution": "© Dellinger,A. 213, WU (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Dellinger,A. 213",
+    "gbifID": "5133017338",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fapi.jacq.org%2Fv1%2Fimages%2Feuropeana%2F1493425%3Fwithredirect%3D1&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://api.jacq.org/v1/images/europeana/1493425?withredirect=1",
+    "publisher": "WU",
+    "source_url": "https://www.gbif.org/occurrence/5133017338"
+  },
+  "Ocreatus underwoodii": {
+    "attribution": "© Anna Hess, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Anna Hess",
+    "gbifID": "6130303255",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F608019392%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608019392/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6130303255"
+  },
+  "Oenocarpus bataua": {
+    "attribution": "© Alfredo Gutierrez Dipaz, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Alfredo Gutierrez Dipaz",
+    "gbifID": "5292807508",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F491857602%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/491857602/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5292807508"
+  },
+  "Palicourea fuchsioides": {
+    "attribution": "© Conveyor Belt, Smithsonian Institution, NMNH, Botany (http://creativecommons.org/publicdomain/zero/1.0/)",
+    "creator": "Conveyor Belt",
+    "gbifID": "1702769733",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fcollections.nmnh.si.edu%2Fmedia%2F%3Fi%3D12230810%26h%3D2000&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "original_url": "https://collections.nmnh.si.edu/media/?i=12230810&h=2000",
+    "publisher": "Smithsonian Institution, NMNH, Botany",
+    "source_url": "https://www.gbif.org/occurrence/1702769733"
+  },
+  "Passiflora unipetala": {
+    "attribution": "© MBG, QCNE (http://creativecommons.org/licenses/by-nc-sa/3.0/)",
+    "creator": "MBG",
+    "gbifID": "1257550327",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fimages.mobot.org%2Ftropicosimages3%2Fdetailimages%2FTropicosImages2%2F100269000%2F72767FEE-788E-437C-8DFC-00C82F901ADD.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "original_url": "https://images.mobot.org/tropicosimages3/detailimages/TropicosImages2/100269000/72767FEE-788E-437C-8DFC-00C82F901ADD.jpg",
+    "publisher": "QCNE",
+    "source_url": "https://www.gbif.org/occurrence/1257550327"
+  },
+  "Phaethornis syrmatophorus": {
+    "attribution": "© Andrii Khokhlov, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Andrii Khokhlov",
+    "gbifID": "5154404657",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F461484988%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/461484988/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5154404657"
+  },
+  "Phaethornis yaruqui": {
+    "attribution": "© Dan Vickers, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Dan Vickers",
+    "gbifID": "5759729386",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F559496352%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/559496352/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5759729386"
+  },
+  "Pionus chalcopterus": {
+    "attribution": "© davidenrique, iNaturalist (http://creativecommons.org/licenses/by-nc-sa/4.0/)",
+    "creator": "davidenrique",
+    "gbifID": "6131033796",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F607283232%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607283232/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6131033796"
+  },
+  "Pitcairnia brongniartiana": {
+    "attribution": "© MBG, MO (http://creativecommons.org/licenses/by-nc-sa/3.0/)",
+    "creator": "MBG",
+    "gbifID": "4031751712",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fimages.mobot.org%2Ftropicosimages4%2Fdetailimages%2FTropicosImagesVol4%2F101008000%2F234C15A0-C8E9-4272-B479-F9E531C0A60A.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "original_url": "https://images.mobot.org/tropicosimages4/detailimages/TropicosImagesVol4/101008000/234C15A0-C8E9-4272-B479-F9E531C0A60A.jpg",
+    "publisher": "MO",
+    "source_url": "https://www.gbif.org/occurrence/4031751712"
+  },
+  "Psammisia ulbrichiana": {
+    "attribution": "© Jake Rehage, iNaturalist (http://creativecommons.org/publicdomain/zero/1.0/)",
+    "creator": "Jake Rehage",
+    "gbifID": "4171209444",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F146620399%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/146620399/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/4171209444"
+  },
+  "Pyrilia pulchra": {
+    "attribution": "© Rafaella Cevallos Larrea, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Rafaella Cevallos Larrea",
+    "gbifID": "5889860473",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F469868288%2Foriginal.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/469868288/original.jpeg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5889860473"
+  },
+  "Racinaea tetrantha": {
+    "attribution": "© Manuel Roncal, iNaturalist (http://creativecommons.org/publicdomain/zero/1.0/)",
+    "creator": "Manuel Roncal",
+    "gbifID": "6352387796",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F631112654%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/631112654/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6352387796"
+  },
+  "Ramphastos ambiguus": {
+    "attribution": "© Stephen Lewis, iNaturalist (http://creativecommons.org/publicdomain/zero/1.0/)",
+    "creator": "Stephen Lewis",
+    "gbifID": "5938101679",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F605695756%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605695756/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5938101679"
+  },
+  "Ramphastos brevis": {
+    "attribution": "© Alina Martin, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Alina Martin",
+    "gbifID": "6178350890",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F620947390%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620947390/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6178350890"
+  },
+  "Renealmia sessilifolia": {
+    "attribution": "© Sebastián Ordóñez, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Sebastián Ordóñez",
+    "gbifID": "6235839828",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F637957906%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/637957906/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6235839828"
+  },
+  "Sciurus sp.": {
+    "attribution": "© Olli Haukkovaara (http://creativecommons.org/licenses/by-nc/4.0/)",
+    "creator": "Olli Haukkovaara",
+    "gbifID": "5937737625",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Fimage.laji.fi%2FMM.3868613%2F30ef017b-7313-4651-b60c-a491675b1331.jpeg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "original_url": "https://image.laji.fi/MM.3868613/30ef017b-7313-4651-b60c-a491675b1331.jpeg",
+    "publisher": null,
+    "source_url": "https://www.gbif.org/occurrence/5937737625"
+  },
+  "Thibaudia floribunda": {
+    "attribution": "© Nicolás Baresch Uribe, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Nicolás Baresch Uribe",
+    "gbifID": "4512304438",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F345735268%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/345735268/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/4512304438"
+  },
+  "Tillandsia cyanea": {
+    "attribution": "© 1319392442, NABU|naturgucker (Copyright by the creator. For license and creator details, see https://nabu-naturgucker-beobachtungen.de/?sprache=en&bild=273765556.)",
+    "creator": "1319392442",
+    "gbifID": "5014699902",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Flive.staticflickr.com%2F65535%2F50530469321_395949b760_b.jpg&w=480&output=webp",
+    "license": "Copyright by the creator. For license and creator details, see https://nabu-naturgucker-beobachtungen.de/?sprache=en&bild=273765556.",
+    "original_url": "https://live.staticflickr.com/65535/50530469321_395949b760_b.jpg",
+    "publisher": "NABU|naturgucker",
+    "source_url": "https://www.gbif.org/occurrence/5014699902"
+  },
+  "Trigona sp.": {
+    "attribution": "© Stephen Lewis, iNaturalist (http://creativecommons.org/publicdomain/zero/1.0/)",
+    "creator": "Stephen Lewis",
+    "gbifID": "5938155892",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F605692954%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605692954/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/5938155892"
+  },
+  "Urosticte benjamini": {
+    "attribution": "© Anna Hess, iNaturalist (http://creativecommons.org/licenses/by/4.0/)",
+    "creator": "Anna Hess",
+    "gbifID": "6130057329",
+    "image_url": "https://wsrv.nl/?url=https%3A%2F%2Finaturalist-open-data.s3.amazonaws.com%2Fphotos%2F608025222%2Foriginal.jpg&w=480&output=webp",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "original_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608025222/original.jpg",
+    "publisher": "iNaturalist",
+    "source_url": "https://www.gbif.org/occurrence/6130057329"
+  }
+}
