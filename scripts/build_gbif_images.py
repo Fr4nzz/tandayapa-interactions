@@ -1,265 +1,187 @@
 #!/usr/bin/env python3
-"""Pre-fetch one representative GBIF image per taxon for the static site.
+"""Build public/data/species_images.json: up to N representative GBIF images per taxon,
+prioritising citizen-science OBSERVATIONS (iNaturalist / HUMAN_OBSERVATION) over museum
+PRESERVED_SPECIMEN images (mirrors ithomiini_maps' source ranking).
 
-Reads src/data/interactions.json, collects unique taxa from source/target,
-resolves each to a GBIF usageKey, fetches a license-clean StillImage, wraps it
-through the wsrv.nl resize proxy, and writes:
-  - public/data/species_images.json   (taxon -> image record)
-  - public/data/gbif_attribution.json  (provenance note)
-
-Standard library only. Idempotent and re-runnable.
+Reads src/data/interactions.json + interactions_ephi.json. Stdlib only (urllib).
+Output shape:  { "<taxon>": { "images": [ {image_url, original_url, license, creator,
+                 attribution, source_url, basis, source}, ... ] }, ... }
+Idempotent / incremental: taxa that already have an "images" array are skipped.
 """
-
-import json
-import time
-import urllib.parse
-import urllib.request
-import urllib.error
-import os
-import sys
-
-USER_AGENT = "tandayapa-interactions/0.1 (mailto:fchandi@estud.usfq.edu.ec)"
-RATE_LIMIT_S = 0.2
+import json, os, time, urllib.request, urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INPUT_PATH = os.path.join(ROOT, "src", "data", "interactions.json")
-OUT_DIR = os.path.join(ROOT, "public", "data")
-IMAGES_PATH = os.path.join(OUT_DIR, "species_images.json")
-ATTR_PATH = os.path.join(OUT_DIR, "gbif_attribution.json")
+IMAGES_PATH = os.path.join(ROOT, "public", "data", "species_images.json")
+ATTR_PATH = os.path.join(ROOT, "public", "data", "gbif_attribution.json")
+INATURALIST_DATASET_KEY = "50c9509d-22c7-4a22-a47d-8c48425ef4a7"
+UA = "tandayapa-interactions/0.2 (mailto:fchandi@estud.usfq.edu.ec)"
+MAX_IMAGES = 6
 
-SPECIES_MATCH = "https://api.gbif.org/v1/species/match"
-OCC_SEARCH = "https://api.gbif.org/v1/occurrence/search"
-WSRV = "https://wsrv.nl/"
-
-# Higher-taxonomy hints keyed by interaction group.
-GROUP_HINTS = {
-    "hummingbird": {"class": "Aves"},
-    "bird": {"class": "Aves"},
-    "bat": {"class": "Mammalia"},
-    "mammal": {"class": "Mammalia"},
-    "insect": {"class": "Insecta"},
-    "parasite": {},          # no class hint
-    "plant": {"kingdom": "Plantae"},
+CLASS_HINT = {
+    "hummingbird": ("class", "Aves"), "bird": ("class", "Aves"),
+    "bat": ("class", "Mammalia"), "mammal": ("class", "Mammalia"),
+    "insect": ("class", "Insecta"), "plant": ("kingdom", "Plantae"),
 }
 
-LICENSE_PARAMS = [("license", "CC0_1_0"), ("license", "CC_BY_4_0")]
 
-
-def http_get_json(url, params):
-    """GET a URL with query params, return parsed JSON (or None on failure)."""
-    query = urllib.parse.urlencode(params, doseq=True)
-    full = url + "?" + query if query else url
-    req = urllib.request.Request(full, headers={"User-Agent": USER_AGENT})
+def http_json(url):
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = resp.read().decode("utf-8", "replace")
-        return json.loads(data)
-    except (urllib.error.URLError, urllib.error.HTTPError, ValueError, TimeoutError) as e:
-        print("  HTTP error for %s: %s" % (full, e), file=sys.stderr)
+        req = urllib.request.Request(url, headers={"User-Agent": UA})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read())
+    except Exception:
         return None
-    finally:
-        time.sleep(RATE_LIMIT_S)
 
 
 def collect_taxa(records):
-    """Return ordered dict of taxon name -> group from source/target fields."""
     taxa = {}
     for r in records:
-        s = r.get("source")
-        if s and s not in taxa:
-            taxa[s] = r.get("sourceGroup")
-        t = r.get("target")
-        if t and t not in taxa:
-            taxa[t] = r.get("targetGroup")
+        for who, grp in ((r["source"], r["sourceGroup"]), (r["target"], r["targetGroup"])):
+            taxa.setdefault(who, grp)
     return taxa
 
 
 def resolve_key(name, group):
-    """Resolve a taxon name to a GBIF key. Returns (key, matched_name) or (None, None).
-
-    For names ending in ' sp.' strip to genus and match at genus rank,
-    preferring genusKey.
-    """
-    is_sp = name.endswith(" sp.")
-    query_name = name[:-len(" sp.")].strip() if is_sp else name
-
-    params = [("name", query_name), ("strict", "false"), ("verbose", "true")]
-    for k, v in GROUP_HINTS.get(group, {}).items():
-        params.append((k, v))
-
-    res = http_get_json(SPECIES_MATCH, params)
-    if not res:
-        return None, None
-    if res.get("matchType", "NONE") == "NONE":
-        return None, None
-
-    if is_sp:
-        key = res.get("genusKey") or res.get("usageKey")
-    else:
-        key = res.get("usageKey") or res.get("genusKey")
-    if not key:
-        return None, None
-    matched = res.get("scientificName") or res.get("canonicalName") or query_name
-    return key, matched
+    q = {"name": name[:-4] if name.endswith(" sp.") else name, "strict": "false", "verbose": "true"}
+    if name.endswith(" sp."):
+        q["rank"] = "GENUS"
+    hint = CLASS_HINT.get(group)
+    if hint:
+        q[hint[0]] = hint[1]
+    d = http_json("https://api.gbif.org/v1/species/match?" + urllib.parse.urlencode(q))
+    if not d or d.get("matchType") == "NONE":
+        return None
+    return d.get("usageKey") or d.get("acceptedUsageKey")
 
 
-def looks_like_image_url(url):
-    if not url or not isinstance(url, str):
-        return False
-    if not url.lower().startswith(("http://", "https://")):
-        return False
-    return True
+def source_of(occ):
+    dk = (occ.get("datasetKey") or "")
+    inst = (occ.get("institutionCode") or "").lower()
+    if dk == INATURALIST_DATASET_KEY or inst == "inaturalist":
+        return "iNaturalist"
+    return "GBIF"
 
 
-def extract_image(occ_results):
-    """Walk occurrence results -> media; return first usable StillImage dict or None."""
-    for occ in occ_results:
-        media = occ.get("media") or []
-        for m in media:
-            if m.get("type") != "StillImage":
-                continue
-            identifier = m.get("identifier")
-            if not looks_like_image_url(identifier):
-                continue
-            return {
-                "identifier": identifier,
-                "media_license": m.get("license"),
-                "occ_license": occ.get("license"),
-                "creator": m.get("rightsHolder") or m.get("creator")
-                or occ.get("rightsHolder") or occ.get("recordedBy"),
-                "publisher": m.get("publisher") or occ.get("publisher")
-                or occ.get("institutionCode"),
-                "references": m.get("references") or occ.get("references"),
-                "gbifID": occ.get("gbifID") or occ.get("key"),
-                "species": occ.get("species"),
-                "scientificName": occ.get("scientificName"),
-            }
-    return None
+def rank_key(c):
+    # observations first, museum specimens last; iNaturalist gets the top slot
+    basis = c.get("basis") or ""
+    score = 0
+    if c["source"] == "iNaturalist":
+        score -= 2
+    if basis == "HUMAN_OBSERVATION":
+        score -= 1
+    if basis in ("PRESERVED_SPECIMEN", "MATERIAL_SAMPLE", "MATERIAL_CITATION", "FOSSIL_SPECIMEN"):
+        score += 3
+    return score
 
 
-def fetch_image(key):
-    """Fetch a license-clean image for a taxon key. Returns image dict or None."""
-    base = [("taxonKey", str(key)), ("mediaType", "StillImage"), ("limit", "20")]
-
-    # First try: restrict to CC0 / CC-BY-4.0.
-    res = http_get_json(OCC_SEARCH, base + LICENSE_PARAMS)
-    if res and res.get("results"):
-        img = extract_image(res["results"])
-        if img:
-            return img
-
-    # Retry once without the license filter; keep whatever license the record has.
-    res = http_get_json(OCC_SEARCH, base)
-    if res and res.get("results"):
-        img = extract_image(res["results"])
-        if img:
-            return img
-    return None
+def proxy(url):
+    return "https://wsrv.nl/?url=%s&w=480&output=webp" % urllib.parse.quote(url, safe="")
 
 
-def wsrv_proxy(original_url):
-    q = urllib.parse.urlencode({"url": original_url, "w": "480", "output": "webp"})
-    return WSRV + "?" + q
+def attribution(c):
+    who = c.get("creator") or c.get("rightsHolder")
+    bits = []
+    if who:
+        bits.append("© " + who)
+    if c.get("source") == "iNaturalist":
+        bits.append("iNaturalist")
+    elif c.get("publisher"):
+        bits.append(c["publisher"])
+    if c.get("license"):
+        lic = c["license"].rsplit("/", 2)
+        bits.append("(%s)" % ("/".join([p for p in lic if p][-2:]) if "creativecommons" in c["license"] else c["license"]))
+    return " ".join(bits).strip() or "Image via GBIF"
 
 
-def build_attribution(creator, publisher, license_str):
-    parts = []
-    lead = "©"
-    if creator:
-        lead += " " + creator
-    if publisher:
-        lead += ", " + publisher if creator else " " + publisher
-    bits = lead.strip()
-    if bits == "©":
-        bits = ""
-    if bits:
-        parts.append(bits)
-    if license_str:
-        parts.append("(%s)" % license_str)
-    return " ".join(parts).strip() or None
+def fetch_images(key):
+    candidates, seen = [], set()
+    # two passes: observations first, then a general pass to top up
+    passes = [
+        {"taxonKey": key, "mediaType": "StillImage", "basisOfRecord": "HUMAN_OBSERVATION", "limit": "40"},
+        {"taxonKey": key, "mediaType": "StillImage", "limit": "40"},
+    ]
+    for q in passes:
+        d = http_json("https://api.gbif.org/v1/occurrence/search?" + urllib.parse.urlencode(q))
+        if not d:
+            continue
+        for occ in d.get("results", []):
+            src = source_of(occ)
+            basis = occ.get("basisOfRecord")
+            for m in occ.get("media", []):
+                if m.get("type") != "StillImage":
+                    continue
+                url = m.get("identifier")
+                fmt = m.get("format") or ""
+                if not url or url in seen or not fmt.startswith("image/"):
+                    continue
+                seen.add(url)
+                candidates.append({
+                    "original_url": url,
+                    "image_url": proxy(url),
+                    "license": m.get("license") or occ.get("license"),
+                    "creator": m.get("creator"),
+                    "rightsHolder": m.get("rightsHolder") or occ.get("rightsHolder"),
+                    "publisher": m.get("publisher") or occ.get("publisher"),
+                    "basis": basis,
+                    "source": src,
+                    "source_url": occ.get("references") or ("https://www.gbif.org/occurrence/%s" % occ.get("gbifID")),
+                })
+        time.sleep(0.15)
+    candidates.sort(key=rank_key)
+    out = []
+    for c in candidates[:MAX_IMAGES]:
+        c["attribution"] = attribution(c)
+        c.pop("rightsHolder", None)
+        out.append(c)
+    return out
 
 
 def main():
-    # Load the curated dataset AND the EPHI anchor dataset (if present).
     records = []
     for rel in ("interactions.json", "interactions_ephi.json"):
         p = os.path.join(ROOT, "src", "data", rel)
         if os.path.exists(p):
-            with open(p, "r", encoding="utf-8") as f:
+            with open(p, encoding="utf-8") as f:
                 records += json.load(f).get("records", [])
     taxa = collect_taxa(records)
-    n_total = len(taxa)
-    print("Collected %d unique taxa from %d records." % (n_total, len(records)))
+    print("Collected %d unique taxa." % len(taxa))
 
-    # Incremental: keep images we already have, only fetch the missing taxa.
     images = {}
     if os.path.exists(IMAGES_PATH):
         try:
-            with open(IMAGES_PATH, "r", encoding="utf-8") as f:
+            with open(IMAGES_PATH, encoding="utf-8") as f:
                 images = json.load(f)
         except Exception:
             images = {}
-    print("Already have %d images; fetching the rest." % len(images))
-    n_found = len(images)
-    missed = []
 
+    n_done = 0
     for name, group in taxa.items():
-        if name in images:
-            continue
+        if isinstance(images.get(name), dict) and images[name].get("images"):
+            continue  # already in the new multi-image shape
         try:
-            key, matched = resolve_key(name, group)
+            key = resolve_key(name, group)
             if not key:
-                print("MISS %s (no match)" % name)
-                missed.append(name)
-                continue
-            img = fetch_image(key)
-            if not img:
-                print("MISS %s (no image)" % name)
-                missed.append(name)
-                continue
+                print("MISS %s (no match)" % name); continue
+            imgs = fetch_images(key)
+            if not imgs:
+                print("MISS %s (no image)" % name); continue
+            images[name] = {"images": imgs}
+            n_done += 1
+            print("OK   %s -> %d imgs (%s)" % (name, len(imgs), imgs[0]["source"]))
+        except Exception as e:
+            print("ERR  %s: %s" % (name, e))
+        if n_done % 20 == 0 and n_done:
+            with open(IMAGES_PATH, "w", encoding="utf-8") as f:
+                json.dump(images, f, ensure_ascii=False, indent=0)
 
-            license_str = img.get("media_license") or img.get("occ_license")
-            creator = img.get("creator")
-            publisher = img.get("publisher")
-            gbif_id = img.get("gbifID")
-            original = img["identifier"]
-
-            record = {
-                "image_url": wsrv_proxy(original),
-                "original_url": original,
-                "license": license_str,
-                "creator": creator,
-                "publisher": publisher,
-                "attribution": build_attribution(creator, publisher, license_str),
-                "source_url": ("https://www.gbif.org/occurrence/%s" % gbif_id)
-                if gbif_id else None,
-                "gbifID": str(gbif_id) if gbif_id is not None else None,
-            }
-            images[name] = record
-            n_found += 1
-            print("OK %s -> %s" % (name, license_str or "unknown"))
-        except Exception as e:  # noqa: BLE001 — one taxon must not abort the run
-            print("MISS %s (error: %s)" % (name, e), file=sys.stderr)
-            missed.append(name)
-
-    os.makedirs(OUT_DIR, exist_ok=True)
     with open(IMAGES_PATH, "w", encoding="utf-8") as f:
-        json.dump(images, f, ensure_ascii=False, indent=2, sort_keys=True)
-
-    attribution = {
-        "note": ("Occurrence and media data from GBIF (https://www.gbif.org). "
-                 "Images are reproduced under their individual per-record Creative "
-                 "Commons licenses (CC0 / CC-BY); see each entry's license and "
-                 "source_url for attribution."),
-        "source": "https://www.gbif.org",
-        "generated_by": "scripts/build_gbif_images.py",
-    }
+        json.dump(images, f, ensure_ascii=False, indent=0)
     with open(ATTR_PATH, "w", encoding="utf-8") as f:
-        json.dump(attribution, f, ensure_ascii=False, indent=2)
-
-    print("\nimages: %d/%d" % (n_found, n_total))
-    if missed:
-        print("missed: " + ", ".join(missed))
+        json.dump({"note": "Taxon images from GBIF (https://www.gbif.org), each under its own CC "
+                   "license; observations (iNaturalist) prioritised over museum specimens."}, f, indent=2)
+    n_with = sum(1 for v in images.values() if isinstance(v, dict) and v.get("images"))
+    print("DONE: %d/%d taxa have images." % (n_with, len(taxa)))
 
 
 if __name__ == "__main__":

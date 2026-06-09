@@ -167,6 +167,10 @@ onMounted(() => {
     wheelSensitivity: 0.25,
     minZoom: 0.2,
     maxZoom: 4,
+    // Nodes are not draggable, so a touch/drag that starts on a node pans the
+    // canvas instead of grabbing the node — essential for mobile sliding.
+    autoungrabify: true,
+    boxSelectionEnabled: false,
   })
 
   cy.on('tap', 'node', (evt) => {

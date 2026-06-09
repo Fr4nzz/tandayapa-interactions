@@ -53,17 +53,17 @@ function onExport() {
           class="seg" :class="view === 'network' ? 'seg-on' : ''"
           :style="view === 'network' ? { background: 'var(--accent)', color: '#fff' } : {}"
           @click="view = 'network'"
-        ><Share2 :size="13" /> Network</button>
+        ><Share2 :size="13" /> <span class="hidden sm:inline">Network</span></button>
         <button
           class="seg" :class="view === 'map' ? 'seg-on' : ''"
           :style="view === 'map' ? { background: 'var(--accent)', color: '#fff' } : {}"
           @click="view = 'map'"
-        ><MapIcon :size="13" /> Map</button>
+        ><MapIcon :size="13" /> <span class="hidden sm:inline">Map</span></button>
       </div>
 
       <div class="flex items-center gap-1.5">
         <!-- accent palette -->
-        <div class="relative">
+        <div class="relative hidden sm:block">
           <button class="hbtn" @click="showPalette = !showPalette" title="Accent"><Palette :size="16" /></button>
           <div
             v-if="showPalette"
@@ -84,7 +84,7 @@ function onExport() {
           <Moon v-else :size="16" />
         </button>
         <button class="hbtn md:hidden" @click="showFilters = !showFilters" title="Filters"><SlidersHorizontal :size="16" /></button>
-        <a class="hbtn" href="https://github.com/Fr4nzz/tandayapa-interactions" target="_blank" rel="noopener" title="Repo"><Github :size="16" /></a>
+        <a class="hbtn hidden sm:grid" href="https://github.com/Fr4nzz/tandayapa-interactions" target="_blank" rel="noopener" title="Repo"><Github :size="16" /></a>
         <button class="hbtn" @click="showAbout = true" title="About"><Info :size="16" /></button>
       </div>
     </header>

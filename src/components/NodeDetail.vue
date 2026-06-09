@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
-import { X, ExternalLink, MapPin } from 'lucide-vue-next'
+import { X, ExternalLink, MapPin, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import {
   useGraphStore, GROUP_COLORS, GROUP_LABELS, TYPE_COLORS, TYPE_DIR_LABELS,
   gbifSpeciesUrl, globiTaxonUrl,
@@ -8,7 +8,7 @@ import {
 
 const store = useGraphStore()
 
-// Lazy, cached load of the build-time GBIF image map.
+// Lazy, cached load of the build-time GBIF image map (new shape: { taxon: { images: [...] } }).
 let imagesPromise = null
 const images = ref({})
 function ensureImages() {
@@ -20,15 +20,31 @@ function ensureImages() {
   }
   return imagesPromise
 }
+function imagesFor(name) {
+  const e = images.value[name]
+  if (!e) return []
+  if (Array.isArray(e.images)) return e.images
+  if (e.image_url) return [e] // tolerate the old single-image shape
+  return []
+}
+function thumbFor(name) {
+  const a = imagesFor(name)
+  return a.length ? a[0].image_url : null
+}
 
 const id = computed(() => store.selectedId)
 const node = computed(() => store.selectedNode)
-const img = computed(() => images.value[id.value] || null)
+const gallery = computed(() => imagesFor(id.value))
+const idx = ref(0)
+const current = computed(() => gallery.value[idx.value] || null)
 
-watch(id, (v) => v && ensureImages(), { immediate: true })
+watch(id, (v) => { idx.value = 0; if (v) ensureImages() }, { immediate: true })
+function step(d) {
+  const n = gallery.value.length
+  if (n) idx.value = (idx.value + d + n) % n
+}
 
-// Group by (type + direction) so the header uses the correct reciprocal phrase.
-// e.g. for a hummingbird that IS parasitized: "parasitized by", not "parasite of".
+// Group by (type + direction) with the correct reciprocal phrase.
 const groups = computed(() => {
   const map = new Map()
   for (const r of store.selectedRecords) {
@@ -47,37 +63,41 @@ const groups = computed(() => {
   <transition name="slide">
     <aside
       v-if="id"
-      class="detail w-[340px] shrink-0 border-l border-[var(--border)] bg-[var(--surface)] overflow-y-auto"
+      class="detail w-[340px] shrink-0 border-l border-[var(--border)] bg-[var(--surface)] overflow-y-auto
+             max-md:absolute max-md:inset-0 max-md:w-full max-md:z-30"
     >
+      <!-- Image carousel -->
       <div class="relative">
-        <div class="h-44 w-full bg-[var(--surface-3)] overflow-hidden flex items-center justify-center">
-          <img v-if="img" :src="img.image_url" :alt="id" class="h-full w-full object-cover" loading="lazy" />
+        <div class="h-48 w-full bg-[var(--surface-3)] overflow-hidden flex items-center justify-center">
+          <img v-if="current" :src="current.image_url" :alt="id" class="h-full w-full object-cover" loading="lazy" />
           <div v-else class="text-[var(--faint)] text-sm px-6 text-center">No GBIF image found for this taxon</div>
         </div>
-        <button
-          class="absolute top-2 right-2 grid place-items-center w-8 h-8 rounded-full bg-black/40 text-white hover:bg-black/60"
-          @click="store.select(null)"
-        >
+
+        <template v-if="gallery.length > 1">
+          <button class="navarrow left-2" @click="step(-1)"><ChevronLeft :size="18" /></button>
+          <button class="navarrow right-2" @click="step(1)"><ChevronRight :size="18" /></button>
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+            <span v-for="(g, i) in gallery" :key="i" class="dot" :class="{ 'dot-on': i === idx }"></span>
+          </div>
+        </template>
+
+        <button class="absolute top-2 right-2 grid place-items-center w-8 h-8 rounded-full bg-black/40 text-white hover:bg-black/60" @click="store.select(null)">
           <X :size="16" />
         </button>
-        <div
-          class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[11px] font-medium text-white shadow"
-          :style="{ background: GROUP_COLORS[node?.group] }"
-        >
+        <div class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[11px] font-medium text-white shadow" :style="{ background: GROUP_COLORS[node?.group] }">
           {{ GROUP_LABELS[node?.group] || node?.group }}
+        </div>
+        <div v-if="current?.source === 'iNaturalist'" class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-medium bg-emerald-600/90 text-white">
+          observation
         </div>
       </div>
 
       <div class="p-4">
-        <h2 class="text-xl font-semibold italic text-[var(--text)] leading-tight" style="font-family: Newsreader, Georgia, serif">
-          {{ id }}
-        </h2>
-        <p class="text-xs text-[var(--muted)] mt-0.5">
-          {{ store.selectedRecords.length }} interaction(s) · degree {{ node?.degree }}
-        </p>
-        <p v-if="img" class="text-[10px] text-[var(--faint)] mt-1 leading-snug">
-          {{ img.attribution || 'Image via GBIF' }}
-          <a v-if="img.source_url" :href="img.source_url" target="_blank" rel="noopener" class="underline inline-flex items-center gap-0.5" style="color:var(--accent)">
+        <h2 class="text-xl font-semibold italic text-[var(--text)] leading-tight" style="font-family: Newsreader, Georgia, serif">{{ id }}</h2>
+        <p class="text-xs text-[var(--muted)] mt-0.5">{{ store.selectedRecords.length }} interaction(s) · degree {{ node?.degree }}</p>
+        <p v-if="current" class="text-[10px] text-[var(--faint)] mt-1 leading-snug">
+          {{ current.attribution || 'Image via GBIF' }}
+          <a v-if="current.source_url" :href="current.source_url" target="_blank" rel="noopener" class="underline inline-flex items-center gap-0.5" style="color:var(--accent)">
             source <ExternalLink :size="9" />
           </a>
         </p>
@@ -96,15 +116,19 @@ const groups = computed(() => {
             <li
               v-for="(it, i) in g.items"
               :key="i"
-              class="rounded-lg px-2.5 py-1.5 hover:bg-[var(--surface-3)] cursor-pointer border border-transparent hover:border-[var(--border)]"
+              class="flex items-center gap-2.5 rounded-lg px-2 py-1.5 hover:bg-[var(--surface-3)] cursor-pointer border border-transparent hover:border-[var(--border)]"
               @click="store.select(it.partner)"
             >
-              <div class="text-sm italic text-[var(--text)]" style="font-family: Newsreader, Georgia, serif">{{ it.partner }}</div>
-              <div class="flex items-center gap-1.5 text-[11px] text-[var(--faint)] mt-0.5">
-                <MapPin :size="10" /> {{ it.locality }}
-                <span class="opacity-50">·</span> {{ store.scopeLabel(it.scope) }}
+              <span class="shrink-0 w-9 h-9 rounded-md overflow-hidden bg-[var(--surface-3)] grid place-items-center">
+                <img v-if="thumbFor(it.partner)" :src="thumbFor(it.partner)" :alt="it.partner" class="w-full h-full object-cover" loading="lazy" />
+                <span v-else class="text-[8px] text-[var(--faint)]">—</span>
+              </span>
+              <div class="min-w-0">
+                <div class="text-sm italic text-[var(--text)] truncate" style="font-family: Newsreader, Georgia, serif">{{ it.partner }}</div>
+                <div class="flex items-center gap-1 text-[11px] text-[var(--faint)]">
+                  <MapPin :size="10" /> <span class="truncate">{{ it.locality }} · {{ store.scopeLabel(it.scope) }}</span>
+                </div>
               </div>
-              <div class="text-[11px] text-[var(--faint)]">{{ it.ref }}</div>
             </li>
           </ul>
         </div>
@@ -122,4 +146,12 @@ const groups = computed(() => {
   border: 1px solid var(--border); color: var(--muted); background: var(--surface-2);
 }
 .extlink:hover { color: var(--text); border-color: var(--faint); }
+.navarrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  display: grid; place-items: center; width: 30px; height: 30px;
+  border-radius: 9999px; background: rgba(0,0,0,0.4); color: #fff;
+}
+.navarrow:hover { background: rgba(0,0,0,0.6); }
+.dot { width: 6px; height: 6px; border-radius: 9999px; background: rgba(255,255,255,0.5); }
+.dot-on { background: #fff; }
 </style>
