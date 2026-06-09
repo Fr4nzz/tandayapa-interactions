@@ -1,0 +1,13 @@
+{
+  "ref": "Maguina-Conde & Muchhala 2024, Dryad doi:10.7291/D1QX26 (CC0); primary article Muchhala et al. 2024, Ecosphere 15(4):e4823",
+  "records": [],
+  "extractionError": "Dryad metadata API confirms the dataset (CC0, title 'Bat-flower trait matching: Extreme phenotypic specialization affects diet preferences but not diet breadth', file pollenpresence.csv = 3445 bytes, file id 2992770). But every download route is bot-walled: the /api/v2/files/<id>/download and /datasets/<doi>/download endpoints now return HTTP 401 'must have current bearer token', and the public /downloads/file_stream/<id> route is behind AWS WAF (token.awswaf.com challenge.js, HTTP 202 JS-challenge interstitial) layered over an Anubis SHA-256 proof-of-work wall. The Anubis PoW is solvable in stdlib Python (solver written at papers/supp2/_anubis_fetch.py), but the outer AWS WAF requires executing AWS's proprietary browser challenge.js to mint an aws-waf-token cookie, which is not possible with urllib/curl/WebFetch. WebFetch on the download URL returns 403; on the landing page it returns README text only. No Zenodo/figshare/GBIF mirror of the raw files exists (Zenodo only points back to the same Dryad DOI). TO COMPLETE: download pollenpresence.csv (and flowers.csv) from https://datadryad.org/dataset/doi:10.7291/D1QX26 in a real browser, save as papers/supp2/maguina2024_pollenpresence.csv, then run: python3 scripts/paper_tools/extract_maguina_bats.py",
+  "extractionPlan": {
+    "inputFile": "papers/supp2/maguina2024_pollenpresence.csv",
+    "knownColumns": "Site, Species (bat), N (sample count), then ~43 plant-taxon columns (cols 4-46); cell value = number of pollen-positive samples for that bat-species/site combination",
+    "emitRule": "for each cell with value > 0: source=bat species, sourceGroup='bat', target=plant taxon (column header), targetGroup='plant', type='pollinates', evidence='pollen presence on captured bat'",
+    "sites": ["Reserva Bellavista (Pichincha)", "Bosque Macas Domono (Morona-Santiago)", "Reserva Floristica Rio Guajalito (Pichincha)", "San Francisco Scientific Station (Loja)", "Siempre Verde Reserve (Imbabura)", "Tapichalaca Biological Reserve (Zamora-Chinchipe)", "Yanayacu Biological Station (Napo)", "Wildsumaco Wildlife Sanctuary (Napo)"],
+    "scopeRule": "Bellavista + Rio Guajalito -> scope 'corridor-core'; the other 6 Ecuadorian reserves -> scope 'regional NW Ecuador'. certainty 'verified', needs_field_verification false.",
+    "runner": "scripts/paper_tools/extract_maguina_bats.py"
+  }
+}

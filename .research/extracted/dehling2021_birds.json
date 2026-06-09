@@ -1,0 +1,13 @@
+{
+  "ref": "Dehling et al. 2021, ANDEAN frugivory dataset, Dryad doi:10.5061/dryad.wm37pvmn5 (CC0); see Dehling et al. 2021 Functional Ecology 35(8):1810-1821, doi:10.1111/1365-2435.13815",
+  "note": "Ecuador networks only (NW_Ecuador1-3) from the Dehling Andean transect; southern Ecuador (Podocarpus NP / San Francisco area), NOT the Mindo-Tandayapa corridor. To be flagged scope='regional Andes (comparative)', certainty='regional candidate', needs_field_verification=true.",
+  "records": [],
+  "extractionError": "Dryad metadata + versions API confirm the dataset (CC0, version 211209) and its per-network files, including NW_Ecuador1.txt (4058 B, file 741804), NW_Ecuador2.txt (2681 B, 741805), NW_Ecuador3.txt (1071 B, 741806) plus ANDEAN_FRUGIVORY_readme.txt. Same download wall as Source 1: /api/v2/files/<id>/download and /datasets/<doi>/download return HTTP 401 (bearer token required); /downloads/file_stream/<id> is behind AWS WAF (token.awswaf.com challenge.js) over Anubis PoW; WebFetch returns 403/404. The Anubis PoW is solvable in stdlib (papers/supp2/_anubis_fetch.py) but the AWS WAF token needs a real browser. The readme is not inlined on the landing page so exact matrix orientation is unconfirmed (the extractor auto-detects it). No separate Zenodo/figshare/GBIF copy (Zenodo entry only redirects to this Dryad DOI). TO COMPLETE: download NW_Ecuador1.txt, NW_Ecuador2.txt, NW_Ecuador3.txt (and ANDEAN_FRUGIVORY_readme.txt) from https://datadryad.org/dataset/doi:10.5061/dryad.wm37pvmn5 in a real browser, save as papers/supp2/dehling_NW_Ecuador{1,2,3}.txt, then run: python3 scripts/paper_tools/extract_dehling_birds.py",
+  "extractionPlan": {
+    "inputFiles": ["papers/supp2/dehling_NW_Ecuador1.txt", "papers/supp2/dehling_NW_Ecuador2.txt", "papers/supp2/dehling_NW_Ecuador3.txt"],
+    "expectedFormat": "bipartite interaction matrix (plant species x bird species, cells = interaction frequency); extractor also handles edge-list inputs and auto-detects which axis is birds",
+    "emitRule": "for each non-zero cell: source=bird, sourceGroup='bird', target=plant, targetGroup='plant', type='dispersesSeedsOf', evidence='frugivory/seed-dispersal network'",
+    "scopeRule": "Ecuador networks only; scope 'regional Andes (comparative)', certainty 'regional candidate', needs_field_verification true. Cap at ~400 edges.",
+    "runner": "scripts/paper_tools/extract_dehling_birds.py"
+  }
+}
