@@ -79,6 +79,7 @@ const SCOPE_LABELS = {
   'Tandayapa core': 'Tandayapa core',
   'nearby reserve': 'Nearby reserve',
   'regional NW Ecuador': 'Regional NW Ecuador',
+  'regional Andes (comparative)': 'Regional Andes (comparative)',
 }
 
 function uniq(arr) {
