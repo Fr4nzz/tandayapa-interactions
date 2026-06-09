@@ -5,6 +5,7 @@ import papers from '../data/interactions_papers.json'
 import ithomiini from '../data/interactions_ithomiini.json'
 import frugivory from '../data/interactions_frugivory.json'
 import bats from '../data/interactions_bats.json'
+import candidates from '../data/interactions_candidates.json'
 
 // Merge: the curated multi-type set, the Duchenne/EPHI hummingbird–plant anchor, records mined
 // from OA papers (Harrigan, Tinoco, GloBI…), the curated Ithomiini larval host-plants, the Dehling
@@ -13,6 +14,7 @@ const data = {
   records: [
     ...curated.records, ...ephi.records, ...papers.records,
     ...ithomiini.records, ...frugivory.records, ...bats.records,
+    ...candidates.records,
   ],
 }
 
@@ -44,6 +46,7 @@ export const GROUP_COLORS = {
   parasite: '#ef4444',
   insect: '#facc15',
   mammal: '#fb923c',
+  reptile: '#0ea5e9',
 }
 
 export const GROUP_LABELS = {
@@ -54,6 +57,7 @@ export const GROUP_LABELS = {
   parasite: 'Parasites',
   insect: 'Insects',
   mammal: 'Mammals',
+  reptile: 'Reptiles',
 }
 
 // One color per interaction type.
