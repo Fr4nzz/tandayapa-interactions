@@ -139,7 +139,7 @@ def fetch_images(key):
 
 def main():
     records = []
-    for rel in ("interactions.json", "interactions_ephi.json"):
+    for rel in ("interactions.json", "interactions_ephi.json", "interactions_papers.json"):
         p = os.path.join(ROOT, "src", "data", rel)
         if os.path.exists(p):
             with open(p, encoding="utf-8") as f:
