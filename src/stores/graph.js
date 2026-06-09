@@ -4,14 +4,15 @@ import ephi from '../data/interactions_ephi.json'
 import papers from '../data/interactions_papers.json'
 import ithomiini from '../data/interactions_ithomiini.json'
 import frugivory from '../data/interactions_frugivory.json'
+import bats from '../data/interactions_bats.json'
 
-// Merge the curated multi-type dataset with the Duchenne/EPHI anchor (~1,686 edges),
-// records mined from open-access papers (Harrigan, Tinoco, GloBI…), the curated Ithomiini
-// larval host-plant associations, and the Dehling Andean bird–plant frugivory networks.
+// Merge: the curated multi-type set, the Duchenne/EPHI hummingbird–plant anchor, records mined
+// from OA papers (Harrigan, Tinoco, GloBI…), the curated Ithomiini larval host-plants, the Dehling
+// Andean bird–plant frugivory networks, and the Maguiña-Conde/Muchhala bat–flower pollen matrix.
 const data = {
   records: [
     ...curated.records, ...ephi.records, ...papers.records,
-    ...ithomiini.records, ...frugivory.records,
+    ...ithomiini.records, ...frugivory.records, ...bats.records,
   ],
 }
 
