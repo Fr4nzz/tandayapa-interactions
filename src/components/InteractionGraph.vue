@@ -167,10 +167,13 @@ onMounted(() => {
     wheelSensitivity: 0.25,
     minZoom: 0.2,
     maxZoom: 4,
-    // Nodes are not draggable, so a touch/drag that starts on a node pans the
-    // canvas instead of grabbing the node — essential for mobile sliding.
+    // Nodes are not draggable/selectable in cytoscape's own model, so a touch/drag that
+    // starts on a node pans the canvas instead of grabbing the node — essential for mobile
+    // sliding. (Tap selection is handled by our own 'tap' listener, not cytoscape selection.)
     autoungrabify: true,
+    autounselectify: true,
     boxSelectionEnabled: false,
+    userPanningEnabled: true,
   })
 
   cy.on('tap', 'node', (evt) => {
