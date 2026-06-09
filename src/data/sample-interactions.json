@@ -1,0 +1,34 @@
+{
+  "_meta": {
+    "note": "Phase-0 sample. Real edges extracted from open-access sources. NOT the full database.",
+    "schema": "edge-list; see PLAN-tandayapa.md for full schema"
+  },
+  "records": [
+    { "source": "Aglaiocercus coelestis", "sourceGroup": "hummingbird", "target": "Cavendishia grandifolia", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "Maquipucuna", "scope": "nearby reserve", "ref": "Santander et al. 2020 (EPHI)" },
+    { "source": "Aglaiocercus coelestis", "sourceGroup": "hummingbird", "target": "Centropogon solanifolius", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "Maquipucuna", "scope": "nearby reserve", "ref": "Santander et al. 2020 (EPHI)" },
+    { "source": "Phaethornis syrmatophorus", "sourceGroup": "hummingbird", "target": "Heliconia impudica", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "Maquipucuna", "scope": "nearby reserve", "ref": "Santander et al. 2020 (EPHI)" },
+    { "source": "Phaethornis yaruqui", "sourceGroup": "hummingbird", "target": "Costus pulverulentus", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "Maquipucuna", "scope": "nearby reserve", "ref": "Santander et al. 2020 (EPHI)" },
+    { "source": "Coeligena wilsoni", "sourceGroup": "hummingbird", "target": "Psammisia ulbrichiana", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "Maquipucuna", "scope": "nearby reserve", "ref": "Santander et al. 2020 (EPHI)" },
+    { "source": "Heliodoxa jacula", "sourceGroup": "hummingbird", "target": "Erythrina megistophylla", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "Maquipucuna", "scope": "nearby reserve", "ref": "Santander et al. 2020 (EPHI)" },
+    { "source": "Ocreatus underwoodii", "sourceGroup": "hummingbird", "target": "Macleania smithiana", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "Maquipucuna", "scope": "nearby reserve", "ref": "Santander et al. 2020 (EPHI)" },
+
+    { "source": "Anoura geoffroyi", "sourceGroup": "bat", "target": "Burmeistera sodiroana", "targetGroup": "plant", "type": "pollinates", "locality": "Otonga / Guajalito", "scope": "regional NW Ecuador", "ref": "Muchhala & Jarrin 2002" },
+    { "source": "Anoura geoffroyi", "sourceGroup": "bat", "target": "Meriania pichinchensis", "targetGroup": "plant", "type": "pollinates", "locality": "Otonga / Guajalito", "scope": "regional NW Ecuador", "ref": "Muchhala & Jarrin 2002" },
+    { "source": "Anoura geoffroyi", "sourceGroup": "bat", "target": "Marcgravia coriacea", "targetGroup": "plant", "type": "pollinates", "locality": "Otonga / Guajalito", "scope": "regional NW Ecuador", "ref": "Muchhala & Jarrin 2002" },
+    { "source": "Anoura caudifera", "sourceGroup": "bat", "target": "Burmeistera succulenta", "targetGroup": "plant", "type": "pollinates", "locality": "Otonga / Guajalito", "scope": "regional NW Ecuador", "ref": "Muchhala & Jarrin 2002" },
+    { "source": "Anoura caudifera", "sourceGroup": "bat", "target": "Burmeistera sodiroana", "targetGroup": "plant", "type": "pollinates", "locality": "Otonga / Guajalito", "scope": "regional NW Ecuador", "ref": "Muchhala & Jarrin 2002" },
+    { "source": "Anoura caudifera", "sourceGroup": "bat", "target": "Meriania pichinchensis", "targetGroup": "plant", "type": "pollinates", "locality": "Otonga / Guajalito", "scope": "regional NW Ecuador", "ref": "Muchhala & Jarrin 2002" },
+    { "source": "Adelomyia melanogenys", "sourceGroup": "hummingbird", "target": "Burmeistera rubrosepala", "targetGroup": "plant", "type": "pollinates", "locality": "Pahuma", "scope": "nearby reserve", "ref": "Muchhala 2006" },
+
+    { "source": "Eriocnemis nigrivestis", "sourceGroup": "hummingbird", "target": "Macleania rupestris", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "NW Pichincha (Mindo IBA)", "scope": "nearby reserve", "ref": "Guevara et al. 2017" },
+    { "source": "Eriocnemis nigrivestis", "sourceGroup": "hummingbird", "target": "Palicourea fuchsioides", "targetGroup": "plant", "type": "visitsFlowersOf", "locality": "NW Pichincha (Mindo IBA)", "scope": "nearby reserve", "ref": "Guevara et al. 2017" },
+
+    { "source": "Cephalopterus penduliger", "sourceGroup": "bird", "target": "Oenocarpus bataua", "targetGroup": "plant", "type": "dispersesSeedsOf", "locality": "FCAT Choco", "scope": "regional NW Ecuador", "ref": "Mahoney et al. 2018" },
+    { "source": "Ramphastos brevis", "sourceGroup": "bird", "target": "Oenocarpus bataua", "targetGroup": "plant", "type": "dispersesSeedsOf", "locality": "Choco NW Ecuador", "scope": "regional NW Ecuador", "ref": "Mahoney et al. 2018" },
+    { "source": "Pyrilia pulchra", "sourceGroup": "bird", "target": "Oenocarpus bataua", "targetGroup": "plant", "type": "eatsFruitPulpOf", "locality": "Choco NW Ecuador", "scope": "regional NW Ecuador", "ref": "Mahoney et al. 2018" },
+
+    { "source": "Plasmodium sp.", "sourceGroup": "parasite", "target": "Heliodoxa jacula", "targetGroup": "hummingbird", "type": "parasiteOf", "locality": "Milpe", "scope": "nearby reserve", "ref": "Abad et al. 2021" },
+    { "source": "Plasmodium sp.", "sourceGroup": "parasite", "target": "Aglaiocercus coelestis", "targetGroup": "hummingbird", "type": "parasiteOf", "locality": "Puyucunapi", "scope": "nearby reserve", "ref": "Abad et al. 2021" },
+    { "source": "Plasmodium sp.", "sourceGroup": "parasite", "target": "Coeligena wilsoni", "targetGroup": "hummingbird", "type": "parasiteOf", "locality": "Puyucunapi", "scope": "nearby reserve", "ref": "Abad et al. 2021" }
+  ]
+}

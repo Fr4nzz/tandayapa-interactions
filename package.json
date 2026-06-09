@@ -1,0 +1,31 @@
+{
+  "name": "tandayapa-interactions",
+  "version": "0.1.0",
+  "description": "Interactive network of ecological interactions in Tandayapa / NW Ecuador (Chocó Andino)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "cytoscape": "^3.30.0",
+    "cytoscape-fcose": "^2.2.0",
+    "lucide-vue-next": "^0.460.0",
+    "pinia": "^3.0.0",
+    "reka-ui": "^2.0.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "tailwindcss": "^4.1.0",
+    "vite": "^7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fr4nzz/tandayapa-interactions"
+  },
+  "author": "Franz Chandi",
+  "license": "MIT"
+}
