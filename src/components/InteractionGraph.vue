@@ -17,6 +17,23 @@ let cy = null
 // to avoid an unreadable hairball.
 const big = store.nodes.length > 120
 
+// On touch devices, nodes ignore pointer events so a one-finger drag pans the canvas
+// from anywhere (no node "grabbing" / active-overlay square). Selection is done by a
+// proximity hit-test on the background tap instead. Desktop keeps hover + direct tap.
+const isTouch = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
+
+function nearestNode(pos) {
+  let best = null, bestD = Infinity
+  const z = cy.zoom()
+  cy.nodes(':visible').forEach((n) => {
+    const np = n.position()
+    const d = Math.hypot(np.x - pos.x, np.y - pos.y)
+    const r = n.width() / 2 + 14 / z
+    if (d < r && d < bestD) { bestD = d; best = n }
+  })
+  return best
+}
+
 function cssVar(name, fallback) {
   if (typeof window === 'undefined') return fallback
   const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
@@ -41,6 +58,8 @@ const stylesheet = [
     selector: 'node',
     style: {
       'background-color': (n) => GROUP_COLORS[n.data('group')] || '#9aa0a6',
+      events: isTouch ? 'no' : 'yes',
+      'overlay-opacity': 0,
       label: 'data(label)',
       'font-size': 9,
       'font-style': 'italic',
@@ -176,15 +195,31 @@ onMounted(() => {
     userPanningEnabled: true,
   })
 
-  cy.on('tap', 'node', (evt) => {
-    store.select(evt.target.id())
-    focusNode(evt.target.id())
-  })
-  cy.on('tap', (evt) => {
-    if (evt.target === cy) store.select(null)
-  })
-  cy.on('mouseover', 'node', (evt) => highlightNeighborhood(evt.target))
-  cy.on('mouseout', 'node', clearHighlight)
+  if (isTouch) {
+    // Nodes ignore events; the tap lands on the core. Hit-test for the nearest node so
+    // taps still select, while drags pan freely from anywhere on the canvas.
+    cy.on('tap', (evt) => {
+      const n = evt.position ? nearestNode(evt.position) : null
+      clearHighlight()
+      if (n) {
+        store.select(n.id())
+        focusNode(n.id())
+        highlightNeighborhood(n)
+      } else {
+        store.select(null)
+      }
+    })
+  } else {
+    cy.on('tap', 'node', (evt) => {
+      store.select(evt.target.id())
+      focusNode(evt.target.id())
+    })
+    cy.on('tap', (evt) => {
+      if (evt.target === cy) store.select(null)
+    })
+    cy.on('mouseover', 'node', (evt) => highlightNeighborhood(evt.target))
+    cy.on('mouseout', 'node', clearHighlight)
+  }
 
   applyFilter()
 })
