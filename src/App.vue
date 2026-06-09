@@ -1,12 +1,13 @@
 <script setup>
 import { ref, onMounted, defineAsyncComponent } from 'vue'
-import { Info, SlidersHorizontal, Github, X, Sun, Moon, Palette, Share2, Map as MapIcon, Table as TableIcon } from 'lucide-vue-next'
+import { Info, SlidersHorizontal, Github, X, Sun, Moon, Palette, Share2, Map as MapIcon, Table as TableIcon, Images as ImagesIcon } from 'lucide-vue-next'
 import { useGraphStore, TYPE_COLORS, TYPE_LABELS } from './stores/graph'
 import { useThemeStore, THEMES } from './stores/theme'
 import InteractionGraph from './components/InteractionGraph.vue'
 import NodeDetail from './components/NodeDetail.vue'
 import FilterPanel from './components/FilterPanel.vue'
 import TablePanel from './components/TablePanel.vue'
+import GalleryPanel from './components/GalleryPanel.vue'
 // Lazy: the maplibre chunk (~1 MB) loads only when the map view is first opened.
 const MapPanel = defineAsyncComponent(() => import('./components/MapPanel.vue'))
 
@@ -73,6 +74,11 @@ function onExport() {
           :style="view === 'table' ? { background: 'var(--accent)', color: '#fff' } : {}"
           @click="view = 'table'"
         ><TableIcon :size="13" /> <span class="hidden sm:inline">Table</span></button>
+        <button
+          class="seg" :class="view === 'gallery' ? 'seg-on' : ''"
+          :style="view === 'gallery' ? { background: 'var(--accent)', color: '#fff' } : {}"
+          @click="view = 'gallery'"
+        ><ImagesIcon :size="13" /> <span class="hidden sm:inline">Gallery</span></button>
       </div>
 
       <div class="flex items-center gap-1.5">
@@ -105,7 +111,9 @@ function onExport() {
 
     <!-- Body -->
     <div class="flex-1 flex min-h-0 relative">
+      <!-- Left column: filters, OR the selected-node detail panel (replaces the menu) -->
       <FilterPanel
+        v-show="!store.selectedId"
         :layout="layout"
         @update:layout="layout = $event"
         @fit="graphRef?.fit()"
@@ -113,11 +121,13 @@ function onExport() {
         class="max-md:absolute max-md:inset-y-0 max-md:left-0 max-md:z-20 max-md:shadow-xl"
         :class="{ 'max-md:hidden': !showFilters }"
       />
+      <NodeDetail />
 
       <main class="flex-1 min-w-0 relative">
         <InteractionGraph v-show="view === 'network'" ref="graphRef" :layout="layout" />
         <MapPanel v-if="view === 'map'" />
         <TablePanel v-if="view === 'table'" />
+        <GalleryPanel v-if="view === 'gallery'" />
 
         <div v-if="view === 'network'" class="absolute bottom-3 left-3 bg-black/40 backdrop-blur text-white rounded-lg px-3 py-2 text-[11px] leading-relaxed pointer-events-none">
           <div class="font-medium mb-1 opacity-90">Hover to highlight · click for details</div>
@@ -129,8 +139,6 @@ function onExport() {
           </div>
         </div>
       </main>
-
-      <NodeDetail />
     </div>
 
     <!-- About modal -->

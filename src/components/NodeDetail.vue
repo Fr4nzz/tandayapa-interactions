@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
-import { X, ExternalLink, MapPin, ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import { ArrowLeft, ExternalLink, MapPin, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import {
   useGraphStore, GROUP_COLORS, GROUP_LABELS, TYPE_COLORS, TYPE_DIR_LABELS,
   gbifSpeciesUrl, globiTaxonUrl,
@@ -63,9 +63,17 @@ const groups = computed(() => {
   <transition name="slide">
     <aside
       v-if="id"
-      class="detail w-[340px] shrink-0 border-l border-[var(--border)] bg-[var(--surface)] overflow-y-auto
+      class="detail w-[340px] shrink-0 border-r border-[var(--border)] bg-[var(--surface)] overflow-y-auto
              max-md:absolute max-md:inset-0 max-md:w-full max-md:z-30"
     >
+      <!-- Back to menu -->
+      <button
+        class="w-full flex items-center gap-1.5 px-3 py-2 text-sm text-[var(--muted)] hover:text-[var(--text)] border-b border-[var(--border)]"
+        @click="store.select(null)"
+      >
+        <ArrowLeft :size="15" /> Back to filters
+      </button>
+
       <!-- Image carousel -->
       <div class="relative">
         <div class="h-48 w-full bg-[var(--surface-3)] overflow-hidden flex items-center justify-center">
@@ -81,9 +89,6 @@ const groups = computed(() => {
           </div>
         </template>
 
-        <button class="absolute top-2 right-2 grid place-items-center w-8 h-8 rounded-full bg-black/40 text-white hover:bg-black/60" @click="store.select(null)">
-          <X :size="16" />
-        </button>
         <div class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[11px] font-medium text-white shadow" :style="{ background: GROUP_COLORS[node?.group] }">
           {{ GROUP_LABELS[node?.group] || node?.group }}
         </div>
