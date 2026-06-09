@@ -143,6 +143,14 @@ function highlightNeighborhood(node) {
 function clearHighlight() {
   cy.elements().removeClass('dim highlight')
 }
+// Persistent highlight for the SELECTED node — survives mouse-out until you click away.
+function applySelectionHighlight() {
+  clearHighlight()
+  if (store.selectedId) {
+    const n = cy.getElementById(store.selectedId)
+    if (!n.empty()) highlightNeighborhood(n)
+  }
+}
 
 function focusNode(id) {
   if (!cy) return
@@ -218,14 +226,15 @@ onMounted(() => {
       if (evt.target === cy) store.select(null)
     })
     cy.on('mouseover', 'node', (evt) => highlightNeighborhood(evt.target))
-    cy.on('mouseout', 'node', clearHighlight)
+    // On mouse-out, revert to the selected node's persistent highlight (or clear if none selected).
+    cy.on('mouseout', 'node', () => applySelectionHighlight())
   }
 
   applyFilter()
 })
 
 watch(() => [store.activeTypes.length, store.activeGroups.length, store.activeScopes.length], applyFilter)
-watch(() => store.selectedId, (id) => focusNode(id))
+watch(() => store.selectedId, (id) => { focusNode(id); applySelectionHighlight() })
 watch(() => props.layout, (l) => runLayout(l))
 watch(() => theme.mode, () => reTheme())
 
