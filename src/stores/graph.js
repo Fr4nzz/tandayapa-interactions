@@ -3,12 +3,16 @@ import curated from '../data/interactions.json'
 import ephi from '../data/interactions_ephi.json'
 import papers from '../data/interactions_papers.json'
 import ithomiini from '../data/interactions_ithomiini.json'
+import frugivory from '../data/interactions_frugivory.json'
 
 // Merge the curated multi-type dataset with the Duchenne/EPHI anchor (~1,686 edges),
-// the records mined from open-access papers (Harrigan, Tinoco…), and the curated
-// Ithomiini larval host-plant associations (insect–plant layer).
+// records mined from open-access papers (Harrigan, Tinoco, GloBI…), the curated Ithomiini
+// larval host-plant associations, and the Dehling Andean bird–plant frugivory networks.
 const data = {
-  records: [...curated.records, ...ephi.records, ...papers.records, ...ithomiini.records],
+  records: [
+    ...curated.records, ...ephi.records, ...papers.records,
+    ...ithomiini.records, ...frugivory.records,
+  ],
 }
 
 // GloBI-compatible interaction-type vocabulary (forward term -> reciprocal term).
