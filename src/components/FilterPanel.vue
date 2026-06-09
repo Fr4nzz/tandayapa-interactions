@@ -23,17 +23,16 @@ function pick(id) {
   showResults.value = false
 }
 function onBlur() {
-  // delay so a click on a result registers before the list closes
   window.setTimeout(() => (showResults.value = false), 150)
 }
 </script>
 
 <template>
-  <aside class="w-64 shrink-0 border-r border-slate-200 bg-slate-50/80 backdrop-blur flex flex-col overflow-y-auto">
+  <aside class="w-64 shrink-0 border-r border-[var(--border)] bg-[var(--surface-2)] flex flex-col overflow-y-auto">
     <div class="p-3.5 space-y-4">
       <!-- Search -->
       <div class="relative">
-        <Search :size="14" class="absolute left-2.5 top-2.5 text-slate-400" />
+        <Search :size="14" class="absolute left-2.5 top-2.5 text-[var(--faint)]" />
         <input
           :value="store.search"
           @input="store.setSearch($event.target.value); showResults = true"
@@ -41,17 +40,18 @@ function onBlur() {
           @blur="onBlur"
           type="text"
           placeholder="Search a taxon…"
-          class="w-full pl-8 pr-2 py-1.5 text-sm rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-300"
+          class="w-full pl-8 pr-2 py-1.5 text-sm rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] focus:outline-none focus:ring-2"
+          style="--tw-ring-color: var(--accent)"
         />
         <ul
           v-if="showResults && store.searchMatches.length"
-          class="absolute z-20 mt-1 w-full bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden"
+          class="absolute z-20 mt-1 w-full bg-[var(--surface)] rounded-lg shadow-lg border border-[var(--border)] overflow-hidden"
         >
           <li
             v-for="m in store.searchMatches"
             :key="m.id"
             @mousedown.prevent="pick(m.id)"
-            class="px-3 py-1.5 text-sm italic hover:bg-emerald-50 cursor-pointer flex items-center gap-2"
+            class="px-3 py-1.5 text-sm italic hover:bg-[var(--surface-3)] cursor-pointer flex items-center gap-2 text-[var(--text)]"
             style="font-family: Newsreader, Georgia, serif"
           >
             <span class="w-2 h-2 rounded-full" :style="{ background: GROUP_COLORS[m.group] }"></span>
@@ -69,9 +69,10 @@ function onBlur() {
             :key="l.id"
             @click="emit('update:layout', l.id)"
             class="text-xs py-1 rounded-md border transition"
-            :class="layout === l.id
-              ? 'bg-slate-800 text-white border-slate-800'
-              : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400'"
+            :style="layout === l.id
+              ? { background: 'var(--accent)', color: '#fff', borderColor: 'var(--accent)' }
+              : {}"
+            :class="layout === l.id ? '' : 'bg-[var(--surface)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--faint)]'"
           >
             {{ l.label }}
           </button>
@@ -85,43 +86,31 @@ function onBlur() {
       <!-- Interaction types -->
       <div>
         <h3 class="panel-h">Interaction types</h3>
-        <label
-          v-for="t in store.allTypes"
-          :key="t"
-          class="flex items-center gap-2 text-sm py-0.5 cursor-pointer select-none"
-        >
-          <input type="checkbox" :checked="store.activeTypes.includes(t)" @change="store.toggleType(t)" class="accent-emerald-500" />
+        <label v-for="t in store.allTypes" :key="t" class="row">
+          <input type="checkbox" :checked="store.activeTypes.includes(t)" @change="store.toggleType(t)" :style="{ accentColor: 'var(--accent)' }" />
           <span class="w-3 h-1.5 rounded" :style="{ background: TYPE_COLORS[t] }"></span>
-          <span class="text-slate-700 flex-1">{{ TYPE_LABELS[t] }}</span>
-          <span class="text-[10px] text-slate-400 tabular-nums">{{ store.typeCounts[t] }}</span>
+          <span class="flex-1 text-[var(--text)]">{{ TYPE_LABELS[t] }}</span>
+          <span class="text-[10px] text-[var(--faint)] tabular-nums">{{ store.typeCounts[t] }}</span>
         </label>
       </div>
 
       <!-- Taxon groups -->
       <div>
         <h3 class="panel-h">Taxon groups</h3>
-        <label
-          v-for="g in store.allGroups"
-          :key="g"
-          class="flex items-center gap-2 text-sm py-0.5 cursor-pointer select-none"
-        >
-          <input type="checkbox" :checked="store.activeGroups.includes(g)" @change="store.toggleGroup(g)" class="accent-emerald-500" />
+        <label v-for="g in store.allGroups" :key="g" class="row">
+          <input type="checkbox" :checked="store.activeGroups.includes(g)" @change="store.toggleGroup(g)" :style="{ accentColor: 'var(--accent)' }" />
           <span class="w-3 h-3 rounded-full" :style="{ background: GROUP_COLORS[g] }"></span>
-          <span class="text-slate-700 flex-1">{{ GROUP_LABELS[g] || g }}</span>
-          <span class="text-[10px] text-slate-400 tabular-nums">{{ store.groupCounts[g] }}</span>
+          <span class="flex-1 text-[var(--text)]">{{ GROUP_LABELS[g] || g }}</span>
+          <span class="text-[10px] text-[var(--faint)] tabular-nums">{{ store.groupCounts[g] }}</span>
         </label>
       </div>
 
       <!-- Locality scope -->
       <div>
         <h3 class="panel-h">Locality scope</h3>
-        <label
-          v-for="sc in store.allScopes"
-          :key="sc"
-          class="flex items-center gap-2 text-sm py-0.5 cursor-pointer select-none"
-        >
-          <input type="checkbox" :checked="store.activeScopes.includes(sc)" @change="store.toggleScope(sc)" class="accent-emerald-500" />
-          <span class="text-slate-700 flex-1">{{ store.scopeLabel(sc) }}</span>
+        <label v-for="sc in store.allScopes" :key="sc" class="row">
+          <input type="checkbox" :checked="store.activeScopes.includes(sc)" @change="store.toggleScope(sc)" :style="{ accentColor: 'var(--accent)' }" />
+          <span class="flex-1 text-[var(--text)]">{{ store.scopeLabel(sc) }}</span>
         </label>
       </div>
     </div>
@@ -132,13 +121,17 @@ function onBlur() {
 .panel-h {
   display: flex; align-items: center; gap: 4px;
   font-size: 11px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.05em; color: #94a3b8; margin-bottom: 6px;
+  letter-spacing: 0.05em; color: var(--faint); margin-bottom: 6px;
+}
+.row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; padding: 2px 0; cursor: pointer; user-select: none;
 }
 .ctrl {
   flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px;
   font-size: 12px; padding: 4px 0; border-radius: 6px;
-  border: 1px solid #e2e8f0; background: #fff; color: #475569;
+  border: 1px solid var(--border); background: var(--surface); color: var(--muted);
   transition: border-color 0.15s;
 }
-.ctrl:hover { border-color: #94a3b8; }
+.ctrl:hover { border-color: var(--faint); }
 </style>

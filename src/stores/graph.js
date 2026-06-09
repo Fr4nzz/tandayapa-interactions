@@ -41,6 +41,17 @@ export const TYPE_LABELS = {
   parasiteOf: 'parasite of',
 }
 
+// Direction-aware phrasing. `out` = selected taxon is the SOURCE (acts on partner);
+// `in` = selected taxon is the TARGET (the inverse / GloBI-style reciprocal term).
+export const TYPE_DIR_LABELS = {
+  visitsFlowersOf: { out: 'visits flowers of', in: 'flowers visited by' },
+  pollinates: { out: 'pollinates', in: 'pollinated by' },
+  dispersesSeedsOf: { out: 'disperses seeds of', in: 'seeds dispersed by' },
+  eatsFruitPulpOf: { out: 'eats fruit pulp of', in: 'fruit pulp eaten by' },
+  nectarRobs: { out: 'nectar-robs', in: 'nectar-robbed by' },
+  parasiteOf: { out: 'parasite of', in: 'parasitized by' },
+}
+
 const SCOPE_LABELS = {
   'Tandayapa core': 'Tandayapa core',
   'nearby reserve': 'Nearby reserve',

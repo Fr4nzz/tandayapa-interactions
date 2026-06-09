@@ -3,13 +3,21 @@ import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
 import cytoscape from 'cytoscape'
 import fcose from 'cytoscape-fcose'
 import { useGraphStore, GROUP_COLORS, TYPE_COLORS } from '../stores/graph'
+import { useThemeStore } from '../stores/theme'
 
 cytoscape.use(fcose)
 
 const props = defineProps({ layout: { type: String, default: 'fcose' } })
 const store = useGraphStore()
+const theme = useThemeStore()
 const el = ref(null)
 let cy = null
+
+function cssVar(name, fallback) {
+  if (typeof window === 'undefined') return fallback
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+  return v || fallback
+}
 
 function buildElements() {
   const nodes = store.nodes.map((n) => ({
@@ -33,8 +41,8 @@ const stylesheet = [
       'font-size': 9,
       'font-style': 'italic',
       'font-family': 'Newsreader, Georgia, serif',
-      color: '#e5e7eb',
-      'text-outline-color': '#0b1020',
+      color: cssVar('--node-label', '#e5e7eb'),
+      'text-outline-color': cssVar('--node-label-outline', '#0b1020'),
       'text-outline-width': 2,
       'text-wrap': 'wrap',
       'text-max-width': 110,
@@ -113,9 +121,20 @@ function focusNode(id) {
   cy.animate({ center: { eles: n }, zoom: Math.max(cy.zoom(), 1.3) }, { duration: 400 })
 }
 
+function reTheme() {
+  if (!cy) return
+  cy.style()
+    .selector('node')
+    .style({
+      color: cssVar('--node-label', '#e5e7eb'),
+      'text-outline-color': cssVar('--node-label-outline', '#0b1020'),
+    })
+    .update()
+}
+
 function exportPng() {
   if (!cy) return null
-  return cy.png({ full: true, scale: 2, bg: '#0b1020' })
+  return cy.png({ full: true, scale: 2, bg: cssVar('--graph-bg-3', '#0b1020') })
 }
 function runLayout(name) {
   if (cy) cy.layout(layoutOpts(name)).run()
@@ -152,6 +171,7 @@ onMounted(() => {
 watch(() => [store.activeTypes.length, store.activeGroups.length, store.activeScopes.length], applyFilter)
 watch(() => store.selectedId, (id) => focusNode(id))
 watch(() => props.layout, (l) => runLayout(l))
+watch(() => theme.mode, () => reTheme())
 
 onBeforeUnmount(() => cy && cy.destroy())
 </script>
@@ -164,9 +184,10 @@ onBeforeUnmount(() => cy && cy.destroy())
 .graph-canvas {
   width: 100%;
   height: 100%;
+  transition: background 0.3s ease;
   background:
-    radial-gradient(1200px 600px at 30% 10%, #15203a 0%, transparent 60%),
-    radial-gradient(900px 500px at 80% 90%, #161a33 0%, transparent 55%),
-    linear-gradient(160deg, #0b1020 0%, #0a0e1c 100%);
+    radial-gradient(1200px 600px at 30% 10%, var(--graph-bg-1) 0%, transparent 60%),
+    radial-gradient(900px 500px at 80% 90%, var(--graph-bg-2) 0%, transparent 55%),
+    linear-gradient(160deg, var(--graph-bg-3) 0%, var(--bg) 100%);
 }
 </style>
