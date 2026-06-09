@@ -1,0 +1,65 @@
+{
+  "ref": "Cuta-Pineda et al. 2021, Avian Research 12:22 (https://doi.org/10.1186/s40657-021-00256-7)",
+  "records": [
+    {
+      "source": "Diglossa caerulescens",
+      "sourceGroup": "bird",
+      "target": "Axinaea scutigera",
+      "targetGroup": "plant",
+      "type": "pollinates",
+      "evidence": "Transported the majority of Axinaea scutigera pollen (p < 0.001); Axinaea is specialized for pollen transport via bulbous stamen appendages, pollen frequency 56.1%, pollen load 13344 grains",
+      "locality": "Natural Park 'El Sinai', Pachavita, Boyaca, high Andean Rainforest 2500-2700 m asl",
+      "scope": "regional NW Ecuador",
+      "ref": "Cuta-Pineda et al. 2021",
+      "certainty": "verified"
+    },
+    {
+      "source": "Diglossa cyanea",
+      "sourceGroup": "bird",
+      "target": "Axinaea scutigera",
+      "targetGroup": "plant",
+      "type": "pollinates",
+      "evidence": "Transported the majority of Axinaea scutigera pollen (p < 0.001); Axinaea is specialized for pollen transport via bulbous stamen appendages, pollen frequency 56.1%, pollen load 13344 grains",
+      "locality": "Natural Park 'El Sinai', Pachavita, Boyaca, high Andean Rainforest 2500-2700 m asl",
+      "scope": "regional NW Ecuador",
+      "ref": "Cuta-Pineda et al. 2021",
+      "certainty": "verified"
+    },
+    {
+      "source": "Diglossa caerulescens",
+      "sourceGroup": "bird",
+      "target": "Cavendishia bracteata",
+      "targetGroup": "plant",
+      "type": "pollinates",
+      "evidence": "Pollen loads of Cavendishia bracteata were higher in D. caerulescens (p < 0.05); plant pollen frequency 15.45%, pollen load 640 grains, nectar robbing 35.47%",
+      "locality": "Natural Park 'El Sinai', Pachavita, Boyaca, high Andean Rainforest 2500-2700 m asl",
+      "scope": "regional NW Ecuador",
+      "ref": "Cuta-Pineda et al. 2021",
+      "certainty": "verified"
+    },
+    {
+      "source": "Diglossa caerulescens",
+      "sourceGroup": "bird",
+      "target": "Columnea strigosa",
+      "targetGroup": "plant",
+      "type": "pollinates",
+      "evidence": "Pollen loads of Columnea strigosa were higher in D. caerulescens (p < 0.05); plant carries pollen (frequency 4.07%, load 112 grains), long corolla >30 mm, classified as undefined/incidental interaction",
+      "locality": "Natural Park 'El Sinai', Pachavita, Boyaca, high Andean Rainforest 2500-2700 m asl",
+      "scope": "regional NW Ecuador",
+      "ref": "Cuta-Pineda et al. 2021",
+      "certainty": "verified"
+    },
+    {
+      "source": "Diglossa albilatera",
+      "sourceGroup": "bird",
+      "target": "Gaultheria erecta",
+      "targetGroup": "plant",
+      "type": "pollinates",
+      "evidence": "D. albilatera transported the higher pollen loads of Gaultheria erecta (p < 0.05); plant pollen frequency 13.01%, pollen load 35 grains, short corolla legitimate-visit cluster",
+      "locality": "Natural Park 'El Sinai', Pachavita, Boyaca, high Andean Rainforest 2500-2700 m asl",
+      "scope": "regional NW Ecuador",
+      "ref": "Cuta-Pineda et al. 2021",
+      "certainty": "verified"
+    }
+  ]
+}

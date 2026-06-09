@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import curated from '../data/interactions.json'
 import ephi from '../data/interactions_ephi.json'
+import papers from '../data/interactions_papers.json'
 
-// Merge the curated multi-type dataset with the Duchenne/EPHI anchor (~1,686 edges).
-const data = { records: [...curated.records, ...ephi.records] }
+// Merge the curated multi-type dataset with the Duchenne/EPHI anchor (~1,686 edges)
+// and the records mined from open-access papers (e.g. Harrigan 2014 host–parasite).
+const data = { records: [...curated.records, ...ephi.records, ...papers.records] }
 
 // GloBI-compatible interaction-type vocabulary (forward term -> reciprocal term).
 export const GLOBI_INVERSE = {

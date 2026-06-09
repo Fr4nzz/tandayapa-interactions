@@ -1,0 +1,5 @@
+{
+  "ref": "Abad et al. 2021",
+  "records": [],
+  "extractionError": "Source PDF is corrupted/truncated (32507 bytes of an expected ~954729 bytes per its linearization header). No complete content streams; pdftotext, pdfinfo, and qpdf repair all fail ('root of pages tree has no /Kids array', 'can't find startxref'). Zero extractable text. No host-parasite records could be read without fabrication. Re-download the PDF and re-run."
+}
