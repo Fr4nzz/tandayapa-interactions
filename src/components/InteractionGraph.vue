@@ -86,7 +86,8 @@ const stylesheet = [
       width: 1.5,
       'line-color': (e) => TYPE_COLORS[e.data('type')] || '#64748b',
       'line-style': (e) => (dashed.includes(e.data('type')) ? 'dashed' : 'solid'),
-      'curve-style': 'bezier',
+      // 'straight' is much cheaper to render than 'bezier' at this scale (still supports arrows).
+      'curve-style': 'straight',
       'target-arrow-shape': (e) => (arrowed.includes(e.data('type')) ? 'triangle' : 'none'),
       'target-arrow-color': (e) => TYPE_COLORS[e.data('type')] || '#64748b',
       'arrow-scale': 0.8,
@@ -201,30 +202,25 @@ onMounted(() => {
     autounselectify: true,
     boxSelectionEnabled: false,
     userPanningEnabled: true,
+    // Performance for the large (~1.6k node / ~4k edge) graph: render a cached texture while
+    // panning/zooming and hide edges during motion; no motion blur; 1× pixel ratio.
+    textureOnViewport: true,
+    hideEdgesOnViewport: true,
+    motionBlur: false,
+    pixelRatio: 1,
   })
 
+  // Tap only sets the selected id; the watcher below performs the SINGLE camera focus +
+  // highlight, so the centring animation isn't started twice (which reset it midway).
   if (isTouch) {
-    // Nodes ignore events; the tap lands on the core. Hit-test for the nearest node so
-    // taps still select, while drags pan freely from anywhere on the canvas.
+    // Nodes ignore events; the tap lands on the core. Hit-test for the nearest node.
     cy.on('tap', (evt) => {
       const n = evt.position ? nearestNode(evt.position) : null
-      clearHighlight()
-      if (n) {
-        store.select(n.id())
-        focusNode(n.id())
-        highlightNeighborhood(n)
-      } else {
-        store.select(null)
-      }
+      store.select(n ? n.id() : null)
     })
   } else {
-    cy.on('tap', 'node', (evt) => {
-      store.select(evt.target.id())
-      focusNode(evt.target.id())
-    })
-    cy.on('tap', (evt) => {
-      if (evt.target === cy) store.select(null)
-    })
+    cy.on('tap', 'node', (evt) => store.select(evt.target.id()))
+    cy.on('tap', (evt) => { if (evt.target === cy) store.select(null) })
     // Hover-highlight only when nothing is selected; once a node is selected the highlight
     // stays locked to it and other nodes don't react to hover.
     cy.on('mouseover', 'node', (evt) => { if (!store.selectedId) highlightNeighborhood(evt.target) })
